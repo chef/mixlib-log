@@ -5,7 +5,5 @@ require 'mixlib/log'
 require 'mixlib/log/formatter'
 
 class Logit
-  class << self
-    include Mixlib::Log
-  end
+  extend(Mixlib::Log)
 end

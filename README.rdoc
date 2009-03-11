@@ -1,13 +1,11 @@
-== Mixlib::Logger
+== Mixlib::Log
 
-Mixlib::Logger provides a mixin for enabling a class based logger object, a-la Merb, Chef, and Nanite.  To use it:
+Mixlib::Log provides a mixin for enabling a class based logger object, a-la Merb, Chef, and Nanite.  To use it:
 
-	require 'mixlib/logger'
+	require 'mixlib/log'
 	
 	class Log
-		class << self
-			include 'mixlib/logger'
-		end
+		extend Mixlib::Log
 	end
 	
 You can then do:

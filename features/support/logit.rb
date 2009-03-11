@@ -17,7 +17,5 @@
 #
 
 class Logit
-  class << self
-    include Mixlib::Log
-  end
+  extend Mixlib::Log
 end
