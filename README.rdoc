@@ -5,9 +5,7 @@ Mixlib::Log provides a mixin for enabling a class based logger object, a-la Merb
 	require 'mixlib/log'
 	
 	class Log
-		class << self
-			include 'mixlib/log'
-		end
+		extend Mixlib::Log
 	end
 	
 You can then do:
