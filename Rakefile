@@ -6,7 +6,7 @@ require 'spec/rake/spectask'
 require 'cucumber/rake/task'
 
 GEM = "mixlib-log"
-GEM_VERSION = "0.0.1"
+GEM_VERSION = "1.0.0"
 AUTHOR = "Opscode, Inc."
 EMAIL = "info@opscode.com"
 HOMEPAGE = "http://www.opscode.com"
@@ -17,7 +17,7 @@ spec = Gem::Specification.new do |s|
   s.version = GEM_VERSION
   s.platform = Gem::Platform::RUBY
   s.has_rdoc = true
-  s.extra_rdoc_files = ["README", "LICENSE", 'TODO']
+  s.extra_rdoc_files = ["README.rdoc", "LICENSE", "NOTICE" ]
   s.summary = SUMMARY
   s.description = s.summary
   s.author = AUTHOR
@@ -29,7 +29,7 @@ spec = Gem::Specification.new do |s|
   
   s.require_path = 'lib'
   s.autorequire = GEM
-  s.files = %w(LICENSE README Rakefile TODO) + Dir.glob("{lib,spec}/**/*")
+  s.files = %w(LICENSE README.rdoc Rakefile NOTICE) + Dir.glob("{lib,spec,features}/**/*")
 end
 
 task :default => :test
