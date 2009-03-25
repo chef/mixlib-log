@@ -33,11 +33,7 @@ module Mixlib
     #
     # It also configures the Logger instance it creates to use the custom Mixlib::Log::Formatter class.
     def init(*opts)
-      if opts.length == 0
-        @logger = Logger.new(STDOUT)
-      else
-        @logger = Logger.new(*opts)
-      end
+      @logger ||= (opts.empty? ? Logger.new(STDOUT) : Logger.new(*opts))
       @logger.formatter = Mixlib::Log::Formatter.new()
     end
     
@@ -51,33 +47,18 @@ module Mixlib
     #
     # Throws an ArgumentError if you feed it a bogus log level.
     def level(loglevel=:warn)
-      init() unless @logger
-      case loglevel
-      when :debug
-        @logger.level = Logger::DEBUG
-      when :info
-        @logger.level = Logger::INFO
-      when :warn
-        @logger.level = Logger::WARN
-      when :error
-        @logger.level = Logger::ERROR
-      when :fatal
-        @logger.level = Logger::FATAL
-      else
-        raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal"
-      end
+      init()
+      level = { :debug=>Logger::DEBUG, :info=>Logger::INFO, :warn=>Logger::WARN, :error=>Logger::ERROR, :fatal=>Logger::FATAL}[loglevel]
+      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if level.nil?
+      @logger.level = level
     end
     
     # Passes any other method calls on directly to the underlying Logger object created with init. If
     # this method gets hit before a call to Mixlib::Logger.init has been made, it will call 
     # Mixlib::Logger.init() with no arguments.
     def method_missing(method_symbol, *args)
-      init() unless @logger
-      if args.length > 0
-        @logger.send(method_symbol, *args)
-      else
-        @logger.send(method_symbol)
-      end
+      init()
+      @logger.send(method_symbol, *args)
     end
     
   end
