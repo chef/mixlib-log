@@ -20,6 +20,12 @@ require 'tempfile'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "spec_helper"))
 
 describe Mixlib::Log do
+
+  # Since we are testing class behaviour for an instance variable
+  # that gets set once, we need to reset it prior to each example [cb]
+  before(:each) do
+    Logit.instance_variable_set("@logger",nil)
+  end
   
   it "should accept regular options to Logger.new via init" do
     tf = Tempfile.new("chef-test-log")
