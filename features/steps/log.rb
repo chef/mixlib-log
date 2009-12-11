@@ -17,7 +17,7 @@
 #
 
 Given /^a base log level of '(.+)'$/ do |level|
-  Logit.level(level.to_sym)
+  Logit.level = level.to_sym
 end
 
 When /^the message '(.+)' is sent at the '(.+)' level$/ do |message, level|

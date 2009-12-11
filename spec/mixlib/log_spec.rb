@@ -43,17 +43,17 @@ describe Mixlib::Log do
       :fatal => Logger::FATAL
     }
     levels.each do |symbol, constant|
-      Logit.level(symbol)
+      Logit.level = symbol
       Logit.logger.level.should == constant
     end
   end
   
   it "should raise an ArgumentError if you try and set the level to something strange" do
-    lambda { Logit.level(:the_roots) }.should raise_error(ArgumentError)
+    lambda { Logit.level = :the_roots }.should raise_error(ArgumentError)
   end
   
   it "should pass other method calls directly to logger" do
-    Logit.level(:debug)
+    Logit.level = :debug
     Logit.should be_debug
     lambda { Logit.debug("Gimme some sugar!") }.should_not raise_error
   end
