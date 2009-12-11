@@ -1,5 +1,6 @@
 #
 # Author:: Adam Jacob (<adam@opscode.com>)
+# Author:: Christopher Brown (<cb@opscode.com>)
 # Copyright:: Copyright (c) 2008 Opscode, Inc.
 # License:: Apache License, Version 2.0
 #
@@ -22,15 +23,18 @@ module Mixlib
   module Log
   
     @logger = nil
+    @@levels = { :debug=>Logger::DEBUG, :info=>Logger::INFO, :warn=>Logger::WARN, :error=>Logger::ERROR, :fatal=>Logger::FATAL}
     
-    attr_writer :logger #:nodoc
-
     ##
     # init always returns a configured logger
     # and creates a new one if it doesn't yet exist
     ##
     def logger
       init
+    end
+
+    def logger=(value)
+      @logger=value
     end
       
     # Use Mixlib::Log.init when you want to set up the logger manually.  Arguments to this method
@@ -44,6 +48,7 @@ module Mixlib
       if @logger.nil?
         @logger = (opts.empty? ? Logger.new(STDOUT) : Logger.new(*opts))
         @logger.formatter = Mixlib::Log::Formatter.new()
+        @logger.level = Logger::WARN
       end
       @logger
     end
@@ -57,10 +62,16 @@ module Mixlib
     #  :fatal
     #
     # Throws an ArgumentError if you feed it a bogus log level.
-    def level(loglevel=:warn)
-      level = { :debug=>Logger::DEBUG, :info=>Logger::INFO, :warn=>Logger::WARN, :error=>Logger::ERROR, :fatal=>Logger::FATAL}[loglevel]
-      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if level.nil?
-      logger.level = level
+    def level=(l)
+      logger.level = @@levels[l]
+      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if logger.level.nil?
+    end
+
+    def level
+      @@levels.each do |k,v|
+        return k if logger.level == v
+      end
+      nil
     end
     
     # Passes any other method calls on directly to the underlying Logger object created with init. If
