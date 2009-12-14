@@ -1,5 +1,6 @@
 #
 # Author:: Adam Jacob (<adam@opscode.com>)
+# Author:: Christopher Brown (<cb@opscode.com>)
 # Copyright:: Copyright (c) 2008 Opscode, Inc.
 # License:: Apache License, Version 2.0
 #
@@ -34,7 +35,22 @@ describe Mixlib::Log do
     lambda { Logit.init(tf) }.should_not raise_error
   end
   
-  it "should set the log level with :debug, :info, :warn, :error, or :fatal" do
+  it "should set the log level using the binding form,  with :debug, :info, :warn, :error, or :fatal" do
+    levels = {
+      :debug => Logger::DEBUG,
+      :info  => Logger::INFO,
+      :warn  => Logger::WARN,
+      :error => Logger::ERROR,
+      :fatal => Logger::FATAL
+    }
+    levels.each do |symbol, constant|
+      Logit.level(symbol)
+      Logit.logger.level.should == constant
+      Logit.level.should == symbol
+    end
+  end
+  
+  it "should set the log level using the method form, with :debug, :info, :warn, :error, or :fatal" do
     levels = {
       :debug => Logger::DEBUG,
       :info  => Logger::INFO,
@@ -48,7 +64,11 @@ describe Mixlib::Log do
     end
   end
   
-  it "should raise an ArgumentError if you try and set the level to something strange" do
+  it "should raise an ArgumentError if you try and set the level to something strange using the binding form" do
+    lambda { Logit.level = :the_roots }.should raise_error(ArgumentError)
+  end
+  
+  it "should raise an ArgumentError if you try and set the level to something strange using the method form" do
     lambda { Logit.level(:the_roots) }.should raise_error(ArgumentError)
   end
   
