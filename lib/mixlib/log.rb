@@ -63,15 +63,17 @@ module Mixlib
     #
     # Throws an ArgumentError if you feed it a bogus log level.
     def level=(l)
-      logger.level = @@levels[l]
-      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if logger.level.nil?
+      lv = @@levels[l]
+      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if lv.nil?
+      logger.level = lv
     end
 
-    def level
-      @@levels.each do |k,v|
-        return k if logger.level == v
+    def level(lv=nil)
+      if lv.nil?
+        @@levels.find() {|l| logger.level==l[1]}[0]
+      else
+        self.level=(lv)
       end
-      nil
     end
     
     # Passes any other method calls on directly to the underlying Logger object created with init. If
