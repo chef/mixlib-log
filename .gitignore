@@ -1,4 +1,5 @@
 *.sw?
+mixlib-log.gemspec
 .DS_Store
 coverage
 rdoc
