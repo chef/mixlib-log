@@ -9,7 +9,7 @@ begin
     gem.email = "info@opscode.com"
     gem.homepage = "http://www.opscode.com"
     gem.authors = ["Opscode, Inc."]
-
+    gem.files.include %w{ bin/* lib/**/* }
     # gem is a Gem::Specification... see http://www.rubygems.org/read/chapter/20 for additional settings
   end
 rescue LoadError
