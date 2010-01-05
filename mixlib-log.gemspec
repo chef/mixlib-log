@@ -28,6 +28,7 @@ Gem::Specification.new do |s|
      "features/support/logit.rb",
      "lib/mixlib/log.rb",
      "lib/mixlib/log/formatter.rb",
+     "mixlib-log.gemspec",
      "spec/mixlib/log/formatter_spec.rb",
      "spec/mixlib/log_spec.rb",
      "spec/spec.opts",
