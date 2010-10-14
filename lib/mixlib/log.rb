@@ -30,7 +30,7 @@ module Mixlib
     # and creates a new one if it doesn't yet exist
     ##
     def logger
-      init
+      @logger || init
     end
 
     def logger=(value)
@@ -45,11 +45,9 @@ module Mixlib
     #
     # It also configures the Logger instance it creates to use the custom Mixlib::Log::Formatter class.
     def init(*opts)
-      if @logger.nil?
-        @logger = (opts.empty? ? Logger.new(STDOUT) : Logger.new(*opts))
-        @logger.formatter = Mixlib::Log::Formatter.new()
-        @logger.level = Logger::WARN
-      end
+      @logger = (opts.empty? ? Logger.new(STDOUT) : Logger.new(*opts))
+      @logger.formatter = Mixlib::Log::Formatter.new()
+      @logger.level = Logger::WARN
       @logger
     end
     
@@ -79,8 +77,8 @@ module Mixlib
     # Passes any other method calls on directly to the underlying Logger object created with init. If
     # this method gets hit before a call to Mixlib::Logger.init has been made, it will call 
     # Mixlib::Logger.init() with no arguments.
-    def method_missing(method_symbol, *args)
-      logger.send(method_symbol, *args)
+    def method_missing(method_symbol, *args, &block)
+      logger.send(method_symbol, *args, &block)
     end
     
   end
