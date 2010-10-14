@@ -14,21 +14,30 @@ begin
   end
   Jeweler::GemcutterTasks.new
 rescue LoadError
-  puts "Jeweler (or a dependency) not available. Install it with: sudo gem install gemcutter jeweler (installs jeweler from gemcutter)"
+  STDERR.puts
+  STDERR.puts "Jeweler is not installed. (sudo) gem install jeweler to use gem packaging tasks"
+  STDERR.puts
 end
 
-require 'spec/rake/spectask'
-Spec::Rake::SpecTask.new(:spec) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.spec_opts = ['--options', "\"#{File.dirname(__FILE__)}/spec/spec.opts\""]
-  spec.spec_files = FileList['spec/**/*_spec.rb']
+begin
+  require 'spec/rake/spectask'
+  Spec::Rake::SpecTask.new(:spec) do |spec|
+    spec.libs << 'lib' << 'spec'
+    spec.spec_opts = ['--options', "\"#{File.dirname(__FILE__)}/spec/spec.opts\""]
+    spec.spec_files = FileList['spec/**/*_spec.rb']
+  end
+
+  Spec::Rake::SpecTask.new(:rcov) do |spec|
+    spec.libs << 'lib' << 'spec'
+    spec.pattern = 'spec/**/*_spec.rb'
+    spec.rcov = true
+  end
+rescue LoadError
+  task :spec do
+    abort "Rspec is not available. (sudo) gem install rspec to run unit tests"
+  end
 end
 
-Spec::Rake::SpecTask.new(:rcov) do |spec|
-  spec.libs << 'lib' << 'spec'
-  spec.pattern = 'spec/**/*_spec.rb'
-  spec.rcov = true
-end
 
 begin
   require 'cucumber/rake/task'
@@ -42,6 +51,8 @@ end
 task :default => :spec
 
 require 'rake/rdoctask'
+require 'yaml'
+
 Rake::RDocTask.new do |rdoc|
   if File.exist?('VERSION.yml')
     config = YAML.load(File.read('VERSION.yml'))
