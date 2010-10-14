@@ -29,10 +29,21 @@ describe Mixlib::Log do
   end
   
   it "should accept regular options to Logger.new via init" do
-    tf = Tempfile.new("chef-test-log")
-    tf.open
-    lambda { Logit.init(STDOUT) }.should_not raise_error
-    lambda { Logit.init(tf) }.should_not raise_error
+    Tempfile.open("chef-test-log") do |tf|
+      lambda { Logit.init(STDOUT) }.should_not raise_error
+      lambda { Logit.init(tf) }.should_not raise_error
+    end
+  end
+
+  it "should re-initialize the logger if init is called again" do
+    first_logdev, second_logdev = StringIO.new, StringIO.new
+    Logit.init(first_logdev)
+    Logit.fatal "FIRST"
+    first_logdev.string.should match(/FIRST/)
+    Logit.init(second_logdev)
+    Logit.fatal "SECOND"
+    first_logdev.string.should_not match(/SECOND/)
+    second_logdev.string.should match(/SECOND/)
   end
   
   it "should set the log level using the binding form,  with :debug, :info, :warn, :error, or :fatal" do
@@ -49,7 +60,15 @@ describe Mixlib::Log do
       Logit.level.should == symbol
     end
   end
-  
+
+  it "passes blocks to the underlying logger object" do
+    logdev = StringIO.new
+    Logit.init(logdev)
+    Logit.fatal { "the_message" }
+    logdev.string.should match(/the_message/)
+  end
+
+
   it "should set the log level using the method form, with :debug, :info, :warn, :error, or :fatal" do
     levels = {
       :debug => Logger::DEBUG,
