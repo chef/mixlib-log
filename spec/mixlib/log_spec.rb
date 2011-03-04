@@ -18,6 +18,7 @@
 #
 
 require 'tempfile'
+require 'stringio'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "spec_helper"))
 
 describe Mixlib::Log do
@@ -98,7 +99,7 @@ describe Mixlib::Log do
   end
   
   it "should default to STDOUT if init is called with no arguments" do
-    logger_mock = mock(Logger, :null_object => true)
+    logger_mock = Struct.new(:formatter, :level).new
     Logger.stub!(:new).and_return(logger_mock)
     Logger.should_receive(:new).with(STDOUT).and_return(logger_mock)
     Logit.init

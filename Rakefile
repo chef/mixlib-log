@@ -20,31 +20,14 @@ rescue LoadError
 end
 
 begin
-  require 'spec/rake/spectask'
-  Spec::Rake::SpecTask.new(:spec) do |spec|
-    spec.libs << 'lib' << 'spec'
-    spec.spec_opts = ['--options', "\"#{File.dirname(__FILE__)}/spec/spec.opts\""]
-    spec.spec_files = FileList['spec/**/*_spec.rb']
+  require 'rspec/core/rake_task'
+  RSpec::Core::RakeTask.new(:spec) do |spec|
+    spec.pattern = 'spec/**/*_spec.rb'
   end
 
-  Spec::Rake::SpecTask.new(:rcov) do |spec|
-    spec.libs << 'lib' << 'spec'
-    spec.pattern = 'spec/**/*_spec.rb'
-    spec.rcov = true
-  end
 rescue LoadError
   task :spec do
     abort "Rspec is not available. (sudo) gem install rspec to run unit tests"
-  end
-end
-
-
-begin
-  require 'cucumber/rake/task'
-  Cucumber::Rake::Task.new(:features)
-rescue LoadError
-  task :features do
-    abort "Cucumber is not available. In order to run features, you must: sudo gem install cucumber"
   end
 end
 
