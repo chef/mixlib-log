@@ -51,10 +51,16 @@ module Mixlib
     end
 
     def use_log_devices(other)
-      if other.respond_to?(:loggers)
+      if other.respond_to?(:loggers) && other.respond_to?(:logger)
         @loggers = other.loggers
-      else
+        @logger = other.logger
+      elsif other.kind_of?(Array)
         @loggers = other
+        @logger = other.first
+      else
+        msg = "#use_log_devices takes a Mixlib::Log object or array of log devices. " <<
+              "You gave: #{other.inspect}"
+        raise ArgumentError, msg
       end
     end
 
