@@ -7,9 +7,9 @@
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
-# 
+#
 #     http://www.apache.org/licenses/LICENSE-2.0
-# 
+#
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -26,9 +26,9 @@ describe Mixlib::Log do
   # Since we are testing class behaviour for an instance variable
   # that gets set once, we need to reset it prior to each example [cb]
   before(:each) do
-    Logit.instance_variable_set("@logger",nil)
+    Logit.reset!
   end
-  
+
   it "should accept regular options to Logger.new via init" do
     Tempfile.open("chef-test-log") do |tf|
       lambda { Logit.init(STDOUT) }.should_not raise_error
@@ -46,7 +46,7 @@ describe Mixlib::Log do
     first_logdev.string.should_not match(/SECOND/)
     second_logdev.string.should match(/SECOND/)
   end
-  
+
   it "should set the log level using the binding form,  with :debug, :info, :warn, :error, or :fatal" do
     levels = {
       :debug => Logger::DEBUG,
@@ -83,26 +83,26 @@ describe Mixlib::Log do
       Logit.logger.level.should == constant
     end
   end
-  
+
   it "should raise an ArgumentError if you try and set the level to something strange using the binding form" do
     lambda { Logit.level = :the_roots }.should raise_error(ArgumentError)
   end
-  
+
   it "should raise an ArgumentError if you try and set the level to something strange using the method form" do
     lambda { Logit.level(:the_roots) }.should raise_error(ArgumentError)
   end
-  
+
   it "should pass other method calls directly to logger" do
     Logit.level = :debug
     Logit.should be_debug
     lambda { Logit.debug("Gimme some sugar!") }.should_not raise_error
   end
-  
+
   it "should default to STDOUT if init is called with no arguments" do
     logger_mock = Struct.new(:formatter, :level).new
     Logger.stub!(:new).and_return(logger_mock)
     Logger.should_receive(:new).with(STDOUT).and_return(logger_mock)
     Logit.init
   end
-  
+
 end
