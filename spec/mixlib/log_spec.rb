@@ -21,6 +21,22 @@ require 'tempfile'
 require 'stringio'
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "spec_helper"))
 
+class LoggerLike
+  attr_accessor :level
+  attr_reader :messages
+  def initialize
+    @messages = ""
+  end
+
+  [:debug, :info, :warn, :error, :fatal].each do |method_name|
+    class_eval(<<-E)
+      def #{method_name}(message)
+        @messages << message
+      end
+    E
+  end
+end
+
 describe Mixlib::Log do
 
   # Since we are testing class behaviour for an instance variable
@@ -29,11 +45,27 @@ describe Mixlib::Log do
     Logit.reset!
   end
 
-  it "should accept regular options to Logger.new via init" do
-    Tempfile.open("chef-test-log") do |tf|
-      lambda { Logit.init(STDOUT) }.should_not raise_error
-      lambda { Logit.init(tf) }.should_not raise_error
+  it "creates a logger using an IO object" do
+    io = StringIO.new
+    Logit.init(io)
+    Logit << "foo"
+    io.string.should match(/foo/)
+  end
+
+  it "creates a logger with a file name" do
+    Tempfile.open("chef-test-log") do |tempfile|
+      Logit.init(tempfile.path)
+      Logit << "bar"
+      tempfile.rewind
+      tempfile.read.should match(/bar/)
     end
+  end
+
+  it "uses the logger provided when initialized with a logger like object" do
+    logger = LoggerLike.new
+    Logit.init(logger)
+    Logit.debug "qux"
+    logger.messages.should match(/qux/)
   end
 
   it "should re-initialize the logger if init is called again" do
