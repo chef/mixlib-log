@@ -17,6 +17,7 @@
 # limitations under the License.
 
 require 'logger'
+require 'mixlib/log/version'
 require 'mixlib/log/formatter'
 
 module Mixlib
