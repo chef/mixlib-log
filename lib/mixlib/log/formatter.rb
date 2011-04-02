@@ -31,7 +31,7 @@ module Mixlib
       # Otherwise, doesn't print the time.
       def call(severity, time, progname, msg)
         if @@show_time
-          sprintf("[%s] %s: %s\n", time.rfc2822(), severity, msg2str(msg))
+          sprintf("[%s] %s: %s\n", time.iso8601(), severity, msg2str(msg))
         else
           sprintf("%s: %s\n", severity, msg2str(msg))
         end
