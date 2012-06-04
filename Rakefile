@@ -2,6 +2,7 @@ require 'rake'
 require 'rubygems/package_task'
 require 'rdoc/task'
 require 'yaml'
+require 'cucumber/rake/task'
 
 gemspec = eval(IO.read('mixlib-log.gemspec'))
 
@@ -29,5 +30,9 @@ RDoc::Task.new do |rdoc|
   rdoc.title = "mixlib-log #{Mixlib::Log::VERSION}"
   rdoc.rdoc_files.include('README*')
   rdoc.rdoc_files.include('lib/**/*.rb')
+end
+
+Cucumber::Rake::Task.new(:features) do |t|
+    t.cucumber_opts = "--format pretty"
 end
 
