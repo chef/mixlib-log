@@ -137,4 +137,11 @@ describe Mixlib::Log do
     Logit.init
   end
 
+  it "should have by default a base log level of warn" do
+    logger_mock = Struct.new(:formatter, :level).new
+    Logger.stub!(:new).and_return(logger_mock)
+    Logit.init
+    Logit.level.should eql(:warn)
+  end
+
 end

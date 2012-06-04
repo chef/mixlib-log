@@ -4,3 +4,6 @@ coverage
 rdoc
 pkg
 .rake_tasks~
+.bundle
+Gemfile.lock
+vendor
