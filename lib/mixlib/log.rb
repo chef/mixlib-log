@@ -72,7 +72,7 @@ module Mixlib
     # get passed directly to Logger.new, so check out the documentation for the standard Logger class
     # to understand what to do here.
     #
-    # If this method is called with no arguments, it will log to STDOUT at the :info level.
+    # If this method is called with no arguments, it will log to STDOUT at the :warn level.
     #
     # It also configures the Logger instance it creates to use the custom Mixlib::Log::Formatter class.
     def init(*opts)
