@@ -1,11 +1,13 @@
 require 'rake'
-require 'rake/gempackagetask'
-require 'rake/rdoctask'
+require 'rubygems/package_task'
+require 'rdoc/task'
 require 'yaml'
 
 gemspec = eval(IO.read('mixlib-log.gemspec'))
 
-Rake::GemPackageTask.new(gemspec).define
+Gem::PackageTask.new(gemspec) do |pkg|
+  pkg.gem_spec = gemspec
+end
 
 begin
   require 'rubygems'
@@ -22,8 +24,7 @@ end
 
 task :default => :spec
 
-
-Rake::RDocTask.new do |rdoc|
+RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "mixlib-log #{Mixlib::Log::VERSION}"
   rdoc.rdoc_files.include('README*')
