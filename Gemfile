@@ -8,4 +8,3 @@ group :development do
   gem "rdoc"
   gem "bundler"
 end
-

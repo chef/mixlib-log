@@ -12,4 +12,7 @@ Gem::Specification.new do |gem|
   gem.has_rdoc = true
   gem.extra_rdoc_files = ["README.rdoc", "LICENSE", 'NOTICE']
   gem.files = Dir['lib/**/*']
+  gem.add_development_dependency 'rake', '~> 0.9.2.2'
+  gem.add_development_dependency 'rspec', '~> 2.10.0'
+  gem.add_development_dependency 'cucumber', '~> 1.2.0'
 end
