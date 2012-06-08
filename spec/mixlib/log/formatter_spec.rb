@@ -40,7 +40,7 @@ describe Mixlib::Log::Formatter do
   it "should return a formatted string with call" do
     time = Time.new
     Mixlib::Log::Formatter.show_time = true
-    @formatter.call("monkey", time, "test", "mos def").should == "[#{time.rfc2822}] monkey: mos def\n"
+    @formatter.call("monkey", time, "test", "mos def").should == "[#{time.iso8601}] monkey: mos def\n"
   end
   
   it "should allow you to turn the time on and off in the output" do
