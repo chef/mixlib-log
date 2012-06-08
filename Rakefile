@@ -17,6 +17,9 @@ end
 
 task :default => :spec
 
+# For rubygems-test
+task :test => :spec
+
 RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = 'rdoc'
   rdoc.title = "mixlib-log #{Mixlib::Log::VERSION}"

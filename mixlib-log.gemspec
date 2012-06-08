@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.authors = ["Opscode, Inc."]
   gem.has_rdoc = true
   gem.extra_rdoc_files = ["README.rdoc", "LICENSE", 'NOTICE']
-  gem.files = Dir['lib/**/*'] + Dir['spec/**/*']
+  gem.files = Dir['lib/**/*'] + Dir['spec/**/*'] + ["Rakefile", ".gemtest", "mixlib-log.gemspec"]
   gem.add_development_dependency 'rake', '~> 0.9.2.2'
   gem.add_development_dependency 'rspec', '~> 2.10.0'
   gem.add_development_dependency 'cucumber', '~> 1.2.0'
