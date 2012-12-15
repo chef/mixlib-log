@@ -130,6 +130,15 @@ describe Mixlib::Log do
     lambda { Logit.debug("Gimme some sugar!") }.should_not raise_error
   end
 
+  it "should pass add method calls directly to logger" do
+    logdev = StringIO.new
+    Logit.init(logdev)
+    Logit.level = :debug
+    Logit.should be_debug
+    lambda { Logit.add(Logger::DEBUG, "Gimme some sugar!") }.should_not raise_error
+    logdev.string.should match(/Gimme some sugar/)
+  end
+
   it "should default to STDOUT if init is called with no arguments" do
     logger_mock = Struct.new(:formatter, :level).new
     Logger.stub!(:new).and_return(logger_mock)

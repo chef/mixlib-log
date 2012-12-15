@@ -133,7 +133,7 @@ module Mixlib
     end
 
     def add(severity, message = nil, progname = nil, &block)
-      loggers.each {|l| l.add(severity, message = nil, progname = nil, &block) }
+      loggers.each {|l| l.add(severity, message, progname, &block) }
     end
 
     alias :log :add
