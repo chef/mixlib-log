@@ -8,6 +8,7 @@ Gem::Specification.new do |gem|
   gem.summary = "A gem that provides a simple mixin for log functionality"
   gem.email = "info@opscode.com"
   gem.homepage = "http://www.opscode.com"
+  gem.license = "Apache-2.0"
   gem.authors = ["Opscode, Inc."]
   gem.has_rdoc = true
   gem.extra_rdoc_files = ["README.rdoc", "LICENSE", 'NOTICE']
