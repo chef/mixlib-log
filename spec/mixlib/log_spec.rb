@@ -130,6 +130,32 @@ describe Mixlib::Log do
     lambda { Logit.debug("Gimme some sugar!") }.should_not raise_error
   end
 
+  context "#warn_once" do
+    it "should warn the first time a given caller logs, but not subsequent times" do
+      expect(Logit).to receive(:warn).with("hi").exactly(1).times
+      expect(Logit).to receive(:debug).with("WARN: hi").exactly(2).times
+      1.upto(3) do
+        Logit.warn_once("hi")
+      end
+    end
+
+    it "should warn the first time a given caller logs, but not subsequent times, even if the message is different" do
+      expect(Logit).to receive(:warn).with("hi 1").exactly(1).times
+      expect(Logit).to receive(:debug).with("WARN: hi 2").exactly(1).times
+      expect(Logit).to receive(:debug).with("WARN: hi 3").exactly(1).times
+      1.upto(3) do |i|
+        Logit.warn_once("hi #{i}")
+      end
+    end
+
+    it "should warn each time for different callers" do
+      expect(Logit).to receive(:warn).with("hi").exactly(3).times
+      Logit.warn_once("hi")
+      Logit.warn_once("hi")
+      Logit.warn_once("hi")
+    end
+  end
+
   it "should pass add method calls directly to logger" do
     logdev = StringIO.new
     Logit.init(logdev)
@@ -141,14 +167,14 @@ describe Mixlib::Log do
 
   it "should default to STDOUT if init is called with no arguments" do
     logger_mock = Struct.new(:formatter, :level).new
-    Logger.stub!(:new).and_return(logger_mock)
+    Logger.stub(:new).and_return(logger_mock)
     Logger.should_receive(:new).with(STDOUT).and_return(logger_mock)
     Logit.init
   end
 
   it "should have by default a base log level of warn" do
     logger_mock = Struct.new(:formatter, :level).new
-    Logger.stub!(:new).and_return(logger_mock)
+    Logger.stub(:new).and_return(logger_mock)
     Logit.init
     Logit.level.should eql(:warn)
   end

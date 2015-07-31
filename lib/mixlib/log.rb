@@ -19,6 +19,7 @@
 require 'logger'
 require 'mixlib/log/version'
 require 'mixlib/log/formatter'
+require 'set'
 
 module Mixlib
   module Log
@@ -30,7 +31,7 @@ module Mixlib
 
 
     def reset!
-      @logger, @loggers = nil, nil
+      @logger, @loggers, @warned_from = nil, nil
     end
 
     # An Array of log devices that will be logged to. Defaults to just the default
@@ -116,6 +117,18 @@ module Mixlib
       METHOD_DEFN
     end
 
+    #
+    # Warn the user about something, but only once per caller. Subsequent log
+    # messages are logged at debug level.
+    #
+    def warn_once(msg=nil, &block)
+      if warned_from.add?(caller[0])
+        warn(msg, &block)
+      else
+        debug("WARN: #{msg}", &block)
+      end
+    end
+
     # Define the methods to interrogate the logger for the current log level.
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
@@ -146,6 +159,10 @@ module Mixlib
     end
 
     private
+
+    def warned_from
+      @warned_from ||= Set.new
+    end
 
     def logger_for(*opts)
       if opts.empty?
