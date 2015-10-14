@@ -43,7 +43,7 @@ module Mixlib
       def msg2str(msg)
         case msg
         when ::String
-          msg
+          caller[8] + " : " + msg
         when ::Exception
           "#{ msg.message } (#{ msg.class })\n" <<
             (msg.backtrace || []).join("\n")
