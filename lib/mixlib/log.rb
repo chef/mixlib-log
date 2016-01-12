@@ -29,6 +29,7 @@ module Mixlib
     LEVEL_NAMES = LEVELS.invert.freeze
 
     def reset!
+      close!
       @logger, @loggers = nil, nil
     end
 
@@ -153,6 +154,27 @@ module Mixlib
         opts.first
       else
         Logger.new(*opts)
+      end
+    end
+
+    def all_loggers
+      [@logger, *@loggers].uniq
+    end
+
+    # select all loggers with File log devices
+    def loggers_to_close
+      loggers_to_close = []
+      all_loggers.each do |logger|
+        next unless logdev = logger.instance_variable_get(:"@logdev")
+        loggers_to_close << logger if logdev.filename
+      end
+      loggers_to_close
+    end
+
+    def close!
+      # try to close all file loggers
+      loggers_to_close.each do |l|
+        l.close rescue nil
       end
     end
 
