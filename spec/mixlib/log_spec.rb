@@ -1,7 +1,7 @@
 #
-# Author:: Adam Jacob (<adam@opscode.com>)
-# Author:: Christopher Brown (<cb@opscode.com>)
-# Copyright:: Copyright (c) 2008 Opscode, Inc.
+# Author:: Adam Jacob (<adam@chef.io>)
+# Author:: Christopher Brown (<cb@chef.io>)
+# Copyright:: Copyright (c) 2008-2016 Chef Software, Inc.
 # License:: Apache License, Version 2.0
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-require 'tempfile'
-require 'stringio'
+require "tempfile"
+require "stringio"
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "spec_helper"))
 
 class LoggerLike
@@ -49,7 +49,7 @@ describe Mixlib::Log do
     io = StringIO.new
     Logit.init(io)
     Logit << "foo"
-    io.string.should match(/foo/)
+    expect(io.string).to match(/foo/)
   end
 
   it "creates a logger with a file name" do
@@ -57,7 +57,7 @@ describe Mixlib::Log do
       Logit.init(tempfile.path)
       Logit << "bar"
       tempfile.rewind
-      tempfile.read.should match(/bar/)
+      expect(tempfile.read).to match(/bar/)
     end
   end
 
@@ -65,18 +65,18 @@ describe Mixlib::Log do
     logger = LoggerLike.new
     Logit.init(logger)
     Logit.debug "qux"
-    logger.messages.should match(/qux/)
+    expect(logger.messages).to match(/qux/)
   end
 
   it "should re-initialize the logger if init is called again" do
     first_logdev, second_logdev = StringIO.new, StringIO.new
     Logit.init(first_logdev)
     Logit.fatal "FIRST"
-    first_logdev.string.should match(/FIRST/)
+    expect(first_logdev.string).to match(/FIRST/)
     Logit.init(second_logdev)
     Logit.fatal "SECOND"
-    first_logdev.string.should_not match(/SECOND/)
-    second_logdev.string.should match(/SECOND/)
+    expect(first_logdev.string).to_not match(/SECOND/)
+    expect(second_logdev.string).to match(/SECOND/)
   end
 
   it "should set the log level using the binding form,  with :debug, :info, :warn, :error, or :fatal" do
@@ -89,8 +89,8 @@ describe Mixlib::Log do
     }
     levels.each do |symbol, constant|
       Logit.level = symbol
-      Logit.logger.level.should == constant
-      Logit.level.should == symbol
+      expect(Logit.logger.level).to eq(constant)
+      expect(Logit.level).to eq(symbol)
     end
   end
 
@@ -98,9 +98,8 @@ describe Mixlib::Log do
     logdev = StringIO.new
     Logit.init(logdev)
     Logit.fatal { "the_message" }
-    logdev.string.should match(/the_message/)
+    expect(logdev.string).to match(/the_message/)
   end
-
 
   it "should set the log level using the method form, with :debug, :info, :warn, :error, or :fatal" do
     levels = {
@@ -112,45 +111,43 @@ describe Mixlib::Log do
     }
     levels.each do |symbol, constant|
       Logit.level(symbol)
-      Logit.logger.level.should == constant
+      expect(Logit.logger.level).to eq(constant)
     end
   end
 
   it "should raise an ArgumentError if you try and set the level to something strange using the binding form" do
-    lambda { Logit.level = :the_roots }.should raise_error(ArgumentError)
+    expect(lambda { Logit.level = :the_roots }).to raise_error(ArgumentError)
   end
 
   it "should raise an ArgumentError if you try and set the level to something strange using the method form" do
-    lambda { Logit.level(:the_roots) }.should raise_error(ArgumentError)
+    expect(lambda { Logit.level(:the_roots) }).to raise_error(ArgumentError)
   end
 
   it "should pass other method calls directly to logger" do
     Logit.level = :debug
-    Logit.should be_debug
-    lambda { Logit.debug("Gimme some sugar!") }.should_not raise_error
+    expect(Logit).to be_debug
+    expect(lambda { Logit.debug("Gimme some sugar!") }).to_not raise_error
   end
 
   it "should pass add method calls directly to logger" do
     logdev = StringIO.new
     Logit.init(logdev)
     Logit.level = :debug
-    Logit.should be_debug
-    lambda { Logit.add(Logger::DEBUG, "Gimme some sugar!") }.should_not raise_error
-    logdev.string.should match(/Gimme some sugar/)
+    expect(Logit).to be_debug
+    expect(lambda { Logit.add(Logger::DEBUG, "Gimme some sugar!") }).to_not raise_error
+    expect(logdev.string).to match(/Gimme some sugar/)
   end
 
   it "should default to STDOUT if init is called with no arguments" do
     logger_mock = Struct.new(:formatter, :level).new
-    Logger.stub!(:new).and_return(logger_mock)
-    Logger.should_receive(:new).with(STDOUT).and_return(logger_mock)
+    expect(Logger).to receive(:new).with(STDOUT).and_return(logger_mock)
     Logit.init
   end
 
   it "should have by default a base log level of warn" do
     logger_mock = Struct.new(:formatter, :level).new
-    Logger.stub!(:new).and_return(logger_mock)
     Logit.init
-    Logit.level.should eql(:warn)
+    expect(Logit.level).to eq(:warn)
   end
 
 end
