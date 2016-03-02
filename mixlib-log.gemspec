@@ -15,5 +15,6 @@ Gem::Specification.new do |gem|
   gem.files = Dir["lib/**/*"] + Dir["spec/**/*"] + ["Gemfile", "Rakefile", ".gemtest", "mixlib-log.gemspec"]
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rspec", "~> 3.4"
+  gem.add_development_dependency "chefstyle", "~> 0.3"
   gem.add_development_dependency "cucumber"
 end
