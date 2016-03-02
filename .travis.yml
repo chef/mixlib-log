@@ -1,0 +1,19 @@
+language: ruby
+cache: bundler
+
+sudo: false
+
+branches:
+  only:
+    - master
+
+before_install:
+  - bundle --version
+  - gem --version
+rvm:
+  - 2.1
+  - 2.2
+
+script:
+  - bundle exec chefstyle
+  - bundle exec rake spec
