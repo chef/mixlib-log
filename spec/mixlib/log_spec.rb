@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-require 'tempfile'
-require 'stringio'
+require "tempfile"
+require "stringio"
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "spec_helper"))
 
 class LoggerLike
@@ -100,7 +100,6 @@ describe Mixlib::Log do
     Logit.fatal { "the_message" }
     logdev.string.should match(/the_message/)
   end
-
 
   it "should set the log level using the method form, with :debug, :info, :warn, :error, or :fatal" do
     levels = {
