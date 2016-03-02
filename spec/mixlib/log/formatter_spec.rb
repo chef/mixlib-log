@@ -25,27 +25,27 @@ describe Mixlib::Log::Formatter do
   end
 
   it "should print raw strings with msg2str(string)" do
-    @formatter.msg2str("nuthin new").should == "nuthin new"
+    expect(@formatter.msg2str("nuthin new")).to eq("nuthin new")
   end
 
   it "should format exceptions properly with msg2str(e)" do
     e = IOError.new("legendary roots crew")
-    @formatter.msg2str(e).should == "legendary roots crew (IOError)\n"
+    expect(@formatter.msg2str(e)).to eq("legendary roots crew (IOError)\n")
   end
 
   it "should format random objects via inspect with msg2str(Object)" do
-    @formatter.msg2str([ "black thought", "?uestlove" ]).should == '["black thought", "?uestlove"]'
+    expect(@formatter.msg2str([ "black thought", "?uestlove" ])).to eq('["black thought", "?uestlove"]')
   end
 
   it "should return a formatted string with call" do
     time = Time.new
     Mixlib::Log::Formatter.show_time = true
-    @formatter.call("monkey", time, "test", "mos def").should == "[#{time.iso8601}] monkey: mos def\n"
+    expect(@formatter.call("monkey", time, "test", "mos def")).to eq("[#{time.iso8601}] monkey: mos def\n")
   end
 
   it "should allow you to turn the time on and off in the output" do
     Mixlib::Log::Formatter.show_time = false
-    @formatter.call("monkey", Time.new, "test", "mos def").should == "monkey: mos def\n"
+    expect(@formatter.call("monkey", Time.new, "test", "mos def")).to eq("monkey: mos def\n")
   end
 
 end
