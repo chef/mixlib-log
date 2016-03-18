@@ -156,9 +156,9 @@ describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_before += 1 unless f.closed?
     end
-    Logit.init('/tmp/logger.log')
-    Logit.init('/tmp/logger.log')
-    Logit.init('/tmp/logger.log')
+    Logit.init("/tmp/logger.log")
+    Logit.init("/tmp/logger.log")
+    Logit.init("/tmp/logger.log")
     opened_files_count_after = 0
     ObjectSpace.each_object(File) do |f|
       opened_files_count_after += 1 unless f.closed?
@@ -171,7 +171,7 @@ describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_before += 1 unless f.closed?
     end
-    file = File.open('/tmp/logger.log')
+    file = File.open("/tmp/logger.log")
     Logit.init(file)
     Logit.init(file)
     Logit.init(file)
