@@ -163,7 +163,7 @@ describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_after += 1 unless f.closed?
     end
-    opened_files_count_after.should eq(opened_files_count_before + 1)
+    expect(opened_files_count_after).to eq(opened_files_count_before + 1)
   end
 
   it "should not close IO logger" do
@@ -179,7 +179,7 @@ describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_after += 1 unless f.closed?
     end
-    opened_files_count_after.should eq(opened_files_count_before + 1)
+    expect(opened_files_count_after).to eq(opened_files_count_before + 1)
   end
 
 end
