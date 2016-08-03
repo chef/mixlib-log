@@ -146,8 +146,40 @@ describe Mixlib::Log do
 
   it "should have by default a base log level of warn" do
     logger_mock = Struct.new(:formatter, :level).new
+    expect(Logger).to receive(:new).and_return(logger_mock)
     Logit.init
     expect(Logit.level).to eq(:warn)
+  end
+
+  it "should close File logger" do
+    opened_files_count_before = 0
+    ObjectSpace.each_object(File) do |f|
+      opened_files_count_before += 1 unless f.closed?
+    end
+    Logit.init("/tmp/logger.log")
+    Logit.init("/tmp/logger.log")
+    Logit.init("/tmp/logger.log")
+    opened_files_count_after = 0
+    ObjectSpace.each_object(File) do |f|
+      opened_files_count_after += 1 unless f.closed?
+    end
+    expect(opened_files_count_after).to eq(opened_files_count_before + 1)
+  end
+
+  it "should not close IO logger" do
+    opened_files_count_before = 0
+    ObjectSpace.each_object(File) do |f|
+      opened_files_count_before += 1 unless f.closed?
+    end
+    file = File.open("/tmp/logger.log")
+    Logit.init(file)
+    Logit.init(file)
+    Logit.init(file)
+    opened_files_count_after = 0
+    ObjectSpace.each_object(File) do |f|
+      opened_files_count_after += 1 unless f.closed?
+    end
+    expect(opened_files_count_after).to eq(opened_files_count_before + 1)
   end
 
 end

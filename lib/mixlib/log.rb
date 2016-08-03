@@ -29,6 +29,7 @@ module Mixlib
     LEVEL_NAMES = LEVELS.invert.freeze
 
     def reset!
+      close!
       @logger, @loggers = nil, nil
     end
 
@@ -153,6 +154,31 @@ module Mixlib
         opts.first
       else
         Logger.new(*opts)
+      end
+    end
+
+    def all_loggers
+      [@logger, *@loggers].uniq
+    end
+
+    # select all loggers with File log devices
+    def loggers_to_close
+      loggers_to_close = []
+      all_loggers.each do |logger|
+        # unfortunately Logger does not provide access to the logdev
+        # via public API. In order to reduce amount of impact and
+        # handle only File type log devices I had to use this method
+        # to get access to it.
+        next unless logdev = logger.instance_variable_get(:"@logdev")
+        loggers_to_close << logger if logdev.filename
+      end
+      loggers_to_close
+    end
+
+    def close!
+      # try to close all file loggers
+      loggers_to_close.each do |l|
+        l.close rescue nil
       end
     end
 
