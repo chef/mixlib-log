@@ -85,7 +85,7 @@ describe Mixlib::Log do
       :info  => Logger::INFO,
       :warn  => Logger::WARN,
       :error => Logger::ERROR,
-      :fatal => Logger::FATAL
+      :fatal => Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level = symbol
@@ -107,7 +107,7 @@ describe Mixlib::Log do
       :info  => Logger::INFO,
       :warn  => Logger::WARN,
       :error => Logger::ERROR,
-      :fatal => Logger::FATAL
+      :fatal => Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level(symbol)
