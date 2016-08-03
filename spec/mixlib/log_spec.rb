@@ -19,12 +19,18 @@
 
 require "tempfile"
 require "stringio"
+require "ostruct"
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "spec_helper"))
 
 class LoggerLike
   attr_accessor :level
   attr_reader :messages
-  def initialize
+  def initialize(dev = STDOUT)
+    @messages = ""
+    @logdev = OpenStruct.new(:dev => dev)
+  end
+
+  def close
     @messages = ""
   end
 
@@ -85,7 +91,7 @@ describe Mixlib::Log do
       :info  => Logger::INFO,
       :warn  => Logger::WARN,
       :error => Logger::ERROR,
-      :fatal => Logger::FATAL
+      :fatal => Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level = symbol
@@ -107,7 +113,7 @@ describe Mixlib::Log do
       :info  => Logger::INFO,
       :warn  => Logger::WARN,
       :error => Logger::ERROR,
-      :fatal => Logger::FATAL
+      :fatal => Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level(symbol)
@@ -139,15 +145,38 @@ describe Mixlib::Log do
   end
 
   it "should default to STDOUT if init is called with no arguments" do
-    logger_mock = Struct.new(:formatter, :level).new
-    expect(Logger).to receive(:new).with(STDOUT).and_return(logger_mock)
+    expect(Logger).to receive(:new).with(STDOUT).and_call_original
     Logit.init
   end
 
   it "should have by default a base log level of warn" do
-    logger_mock = Struct.new(:formatter, :level).new
     Logit.init
     expect(Logit.level).to eq(:warn)
   end
 
+  describe "closes old loggers" do
+    it "should not try to close the STDOUT logger" do
+      log = LoggerLike.new(STDOUT)
+      Logit.init(log)
+      expect(log).to_not receive(:close)
+      Logit.reset!
+    end
+
+    it "should close other loggers" do
+      log = LoggerLike.new(StringIO.new)
+      Logit.init(log)
+      expect(log).to receive(:close)
+      Logit.reset!
+    end
+
+    it "should close all loggers" do
+      log1 = LoggerLike.new(StringIO.new)
+      log2 = LoggerLike.new(StringIO.new)
+      Logit.init
+      Logit.use_log_devices([log1, log2])
+      expect(log1).to receive(:close)
+      expect(log2).to receive(:close)
+      Logit.reset!
+    end
+  end
 end

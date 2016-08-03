@@ -29,7 +29,19 @@ module Mixlib
     LEVEL_NAMES = LEVELS.invert.freeze
 
     def reset!
+      if @loggers
+        @loggers.each { |l| close(l) }
+      else
+        close(@logger) unless @logger.nil?
+      end
+    ensure
       @logger, @loggers = nil, nil
+    end
+
+    def close(logger)
+      unless logger.instance_variable_get(:"@logdev").dev == STDOUT
+        logger.close
+      end
     end
 
     # An Array of log devices that will be logged to. Defaults to just the default
