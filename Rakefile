@@ -1,15 +1,7 @@
-require "rake"
-require "rubygems/package_task"
+require "bundler/gem_tasks"
 require "rdoc/task"
-require "yaml"
 require "rspec/core/rake_task"
 require "cucumber/rake/task"
-
-gemspec = eval(IO.read("mixlib-log.gemspec"))
-
-Gem::PackageTask.new(gemspec) do |pkg|
-  pkg.gem_spec = gemspec
-end
 
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = "spec/**/*_spec.rb"
@@ -29,4 +21,14 @@ end
 
 Cucumber::Rake::Task.new(:features) do |t|
   t.cucumber_opts = "--format pretty"
+end
+
+begin
+  require "chefstyle"
+  require "rubocop/rake_task"
+  RuboCop::RakeTask.new(:style) do |task|
+    task.options += ["--display-cop-names", "--no-color"]
+  end
+rescue LoadError
+  puts "chefstyle/rubocop is not available.  gem install chefstyle to do style checking."
 end
