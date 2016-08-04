@@ -17,4 +17,5 @@ Gem::Specification.new do |gem|
   gem.add_development_dependency "rspec", "~> 3.4"
   gem.add_development_dependency "chefstyle", "~> 0.3"
   gem.add_development_dependency "cucumber"
+  gem.add_development_dependency "github_changelog_generator", "1.11.3"
 end
