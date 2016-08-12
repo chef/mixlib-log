@@ -66,6 +66,7 @@ module Mixlib
           "You gave: #{other.inspect}"
         raise ArgumentError, msg
       end
+      @configured = true
     end
 
     # Use Mixlib::Log.init when you want to set up the logger manually.  Arguments to this method
@@ -80,7 +81,13 @@ module Mixlib
       @logger = logger_for(*opts)
       @logger.formatter = Mixlib::Log::Formatter.new() if @logger.respond_to?(:formatter=)
       @logger.level = Logger::WARN
+      @configured = true
       @logger
+    end
+
+    # Let the application query if logging objects have been set up
+    def configured?
+      @configured
     end
 
     # Sets the level for the Logger object by symbol.  Valid arguments are:
