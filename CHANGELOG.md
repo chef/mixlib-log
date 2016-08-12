@@ -1,5 +1,12 @@
 # Change Log
 
+## [1.7.1](https://github.com/chef/mixlib-log/tree/1.7.1) (2016-08-12)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.7.0...1.7.1)
+
+**Merged pull requests:**
+
+- Allow applications to query if they've got loggers [\#18](https://github.com/chef/mixlib-log/pull/18) ([thommay](https://github.com/thommay))
+
 ## [1.7.0](https://github.com/chef/mixlib-log/tree/1.7.0) (2016-08-04)
 [Full Changelog](https://github.com/chef/mixlib-log/compare/1.4.1...1.7.0)
 
