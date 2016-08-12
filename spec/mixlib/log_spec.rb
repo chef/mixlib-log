@@ -79,6 +79,11 @@ describe Mixlib::Log do
     expect(second_logdev.string).to match(/SECOND/)
   end
 
+  it "knows that it's been configured" do
+    Logit.init
+    expect(Logit.configured?).to be true
+  end
+
   it "should set the log level using the binding form,  with :debug, :info, :warn, :error, or :fatal" do
     levels = {
       :debug => Logger::DEBUG,
