@@ -7,7 +7,7 @@ RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = "spec/**/*_spec.rb"
 end
 
-task :default => :spec
+task default: [:style, :spec, :features]
 
 # For rubygems-test
 task :test => :spec
