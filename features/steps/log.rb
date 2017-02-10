@@ -39,9 +39,9 @@ end
 
 Then /^the regex '(.+)' should be logged$/ do |regex_string|
   regex = Regexp.new(regex_string, Regexp::MULTILINE)
-  regex.match(@output).should_not == nil
+  expect(regex.match(@output)).not_to be_nil
 end
 
 Then /^nothing should be logged$/ do
-  @output.should == ""
+  expect(@output).to eq ""
 end
