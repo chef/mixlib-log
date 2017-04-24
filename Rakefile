@@ -2,6 +2,7 @@ require "bundler/gem_tasks"
 require "rdoc/task"
 require "rspec/core/rake_task"
 require "cucumber/rake/task"
+require "mixlib/log/version"
 
 RSpec::Core::RakeTask.new(:spec) do |spec|
   spec.pattern = "spec/**/*_spec.rb"
@@ -33,11 +34,13 @@ rescue LoadError
   puts "chefstyle/rubocop is not available.  gem install chefstyle to do style checking."
 end
 
-require "github_changelog_generator/task"
+begin
+  require "github_changelog_generator/task"
 
-GitHubChangelogGenerator::RakeTask.new :changelog do |config|
-  config.future_release = Mixlib::Log::VERSION
-  config.enhancement_labels = "enhancement,Enhancement,New Feature,Feature".split(",")
-  config.bug_labels = "bug,Bug,Improvement,Upstream Bug".split(",")
-  config.exclude_labels = "duplicate,question,invalid,wontfix,no_changelog,Exclude From Changelog,Question,Discussion".split(",")
+  GitHubChangelogGenerator::RakeTask.new :changelog do |config|
+    config.issues = false
+    config.future_release = Mixlib::Log::VERSION
+  end
+rescue LoadError
+  puts "github_changelog_generator is not available. gem install github_changelog_generator to generate changelogs"
 end
