@@ -1,0 +1,21 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  DisplayCopNames: true
+  TargetRubyVersion: 2.2
+  Exclude:
+    - 'features/**/*'
+Metrics/LineLength:
+  Max: 120
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*'
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+# Use double quotes everywhere by default.
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+
+

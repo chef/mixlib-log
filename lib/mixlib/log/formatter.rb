@@ -29,9 +29,9 @@ module Mixlib
 
       # Prints a log message as '[time] severity: message' if Chef::Log::Formatter.show_time == true.
       # Otherwise, doesn't print the time.
-      def call(severity, time, progname, msg)
+      def call(severity, time, _progname, msg)
         if @@show_time
-          sprintf("[%s] %s: %s\n", time.iso8601(), severity, msg2str(msg))
+          sprintf("[%s] %s: %s\n", time.iso8601, severity, msg2str(msg))
         else
           sprintf("%s: %s\n", severity, msg2str(msg))
         end

@@ -10,7 +10,7 @@ end
 task default: [:style, :spec, :features]
 
 # For rubygems-test
-task :test => :spec
+task test: :spec
 
 RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = "rdoc"
@@ -39,5 +39,6 @@ GitHubChangelogGenerator::RakeTask.new :changelog do |config|
   config.future_release = Mixlib::Log::VERSION
   config.enhancement_labels = "enhancement,Enhancement,New Feature,Feature".split(",")
   config.bug_labels = "bug,Bug,Improvement,Upstream Bug".split(",")
-  config.exclude_labels = "duplicate,question,invalid,wontfix,no_changelog,Exclude From Changelog,Question,Discussion".split(",")
+  config.exclude_labels = ["duplicate", "question", "invalid", "wontfix",
+                           "no_changelog", "Exclude From Changelog", "Question", "Discussion"]
 end

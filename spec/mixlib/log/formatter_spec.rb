@@ -34,7 +34,7 @@ describe Mixlib::Log::Formatter do
   end
 
   it "should format random objects via inspect with msg2str(Object)" do
-    expect(@formatter.msg2str([ "black thought", "?uestlove" ])).to eq('["black thought", "?uestlove"]')
+    expect(@formatter.msg2str(["black thought", "?uestlove"])).to eq('["black thought", "?uestlove"]')
   end
 
   it "should return a formatted string with call" do
@@ -47,5 +47,4 @@ describe Mixlib::Log::Formatter do
     Mixlib::Log::Formatter.show_time = false
     expect(@formatter.call("monkey", Time.new, "test", "mos def")).to eq("monkey: mos def\n")
   end
-
 end
