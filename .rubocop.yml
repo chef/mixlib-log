@@ -5,6 +5,7 @@ AllCops:
   TargetRubyVersion: 2.2
   Exclude:
     - 'features/**/*'
+    - 'vendor/**/*'
 Metrics/LineLength:
   Max: 120
 Metrics/BlockLength:
