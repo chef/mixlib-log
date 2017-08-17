@@ -28,7 +28,7 @@ class LoggerLike
     @messages = ""
   end
 
-  %i[debug info warn error fatal].each do |method_name|
+  %i{debug info warn error fatal}.each do |method_name|
     class_eval(<<-E)
       def #{method_name}(message)
         @messages << message
@@ -90,7 +90,7 @@ describe Mixlib::Log do
       info: Logger::INFO,
       warn: Logger::WARN,
       error: Logger::ERROR,
-      fatal: Logger::FATAL
+      fatal: Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level = symbol
@@ -112,7 +112,7 @@ describe Mixlib::Log do
       info: Logger::INFO,
       warn: Logger::WARN,
       error: Logger::ERROR,
-      fatal: Logger::FATAL
+      fatal: Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level(symbol)
