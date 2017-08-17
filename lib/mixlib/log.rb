@@ -115,7 +115,7 @@ module Mixlib
 
     # Define the standard logger methods on this class programmatically.
     # No need to incur method_missing overhead on every log call.
-    [:debug, :info, :warn, :error, :fatal].each do |method_name|
+    %i[debug info warn error fatal].each do |method_name|
       class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}(msg=nil, &block)
           loggers.each {|l| l.#{method_name}(msg, &block) }
@@ -127,7 +127,7 @@ module Mixlib
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
-    [:debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+    %i[debug? info? warn? error? fatal?].each do |method_name|
       class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}
           logger.#{method_name}
