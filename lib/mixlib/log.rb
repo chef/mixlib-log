@@ -22,15 +22,16 @@ require "mixlib/log/formatter"
 
 module Mixlib
   module Log
-
     @logger, @loggers = nil
 
-    LEVELS = { :debug => Logger::DEBUG, :info => Logger::INFO, :warn => Logger::WARN, :error => Logger::ERROR, :fatal => Logger::FATAL }.freeze
+    LEVELS = { debug: Logger::DEBUG, info: Logger::INFO,
+               warn: Logger::WARN, error: Logger::ERROR, fatal: Logger::FATAL }.freeze
     LEVEL_NAMES = LEVELS.invert.freeze
 
     def reset!
       close!
-      @logger, @loggers = nil, nil
+      @logger = nil
+      @loggers = nil
     end
 
     # An Array of log devices that will be logged to. Defaults to just the default
@@ -58,13 +59,12 @@ module Mixlib
       if other.respond_to?(:loggers) && other.respond_to?(:logger)
         @loggers = other.loggers
         @logger = other.logger
-      elsif other.kind_of?(Array)
+      elsif other.is_a?(Array)
         @loggers = other
         @logger = other.first
       else
-        msg = "#use_log_devices takes a Mixlib::Log object or array of log devices. " <<
-          "You gave: #{other.inspect}"
-        raise ArgumentError, msg
+        raise ArgumentError, "#use_log_devices takes a Mixlib::Log object or array of log devices. " \
+              "You gave: #{other.inspect}"
       end
       @configured = true
     end
@@ -79,7 +79,7 @@ module Mixlib
     def init(*opts)
       reset!
       @logger = logger_for(*opts)
-      @logger.formatter = Mixlib::Log::Formatter.new() if @logger.respond_to?(:formatter=)
+      @logger.formatter = Mixlib::Log::Formatter.new if @logger.respond_to?(:formatter=)
       @logger.level = Logger::WARN
       @configured = true
       @logger
@@ -109,13 +109,13 @@ module Mixlib
       if new_level.nil?
         LEVEL_NAMES[logger.level]
       else
-        self.level = (new_level)
+        self.level = new_level
       end
     end
 
     # Define the standard logger methods on this class programmatically.
     # No need to incur method_missing overhead on every log call.
-    [:debug, :info, :warn, :error, :fatal].each do |method_name|
+    %i{debug info warn error fatal}.each do |method_name|
       class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}(msg=nil, &block)
           loggers.each {|l| l.#{method_name}(msg, &block) }
@@ -127,7 +127,7 @@ module Mixlib
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
-    [:debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+    %i{debug? info? warn? error? fatal?}.each do |method_name|
       class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}
           logger.#{method_name}
@@ -143,7 +143,7 @@ module Mixlib
       loggers.each { |l| l.add(severity, message, progname, &block) }
     end
 
-    alias :log :add
+    alias log add
 
     # Passes any other method calls on directly to the underlying Logger object created with init. If
     # this method gets hit before a call to Mixlib::Logger.init has been made, it will call
@@ -185,9 +185,12 @@ module Mixlib
     def close!
       # try to close all file loggers
       loggers_to_close.each do |l|
-        l.close rescue nil
+        begin
+          l.close
+        rescue
+          nil
+        end
       end
     end
-
   end
 end

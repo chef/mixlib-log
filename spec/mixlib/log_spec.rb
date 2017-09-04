@@ -28,7 +28,7 @@ class LoggerLike
     @messages = ""
   end
 
-  [:debug, :info, :warn, :error, :fatal].each do |method_name|
+  %i{debug info warn error fatal}.each do |method_name|
     class_eval(<<-E)
       def #{method_name}(message)
         @messages << message
@@ -38,7 +38,6 @@ class LoggerLike
 end
 
 describe Mixlib::Log do
-
   # Since we are testing class behaviour for an instance variable
   # that gets set once, we need to reset it prior to each example [cb]
   before(:each) do
@@ -69,7 +68,8 @@ describe Mixlib::Log do
   end
 
   it "should re-initialize the logger if init is called again" do
-    first_logdev, second_logdev = StringIO.new, StringIO.new
+    first_logdev = StringIO.new
+    second_logdev = StringIO.new
     Logit.init(first_logdev)
     Logit.fatal "FIRST"
     expect(first_logdev.string).to match(/FIRST/)
@@ -86,11 +86,11 @@ describe Mixlib::Log do
 
   it "should set the log level using the binding form,  with :debug, :info, :warn, :error, or :fatal" do
     levels = {
-      :debug => Logger::DEBUG,
-      :info  => Logger::INFO,
-      :warn  => Logger::WARN,
-      :error => Logger::ERROR,
-      :fatal => Logger::FATAL,
+      debug: Logger::DEBUG,
+      info: Logger::INFO,
+      warn: Logger::WARN,
+      error: Logger::ERROR,
+      fatal: Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level = symbol
@@ -108,11 +108,11 @@ describe Mixlib::Log do
 
   it "should set the log level using the method form, with :debug, :info, :warn, :error, or :fatal" do
     levels = {
-      :debug => Logger::DEBUG,
-      :info  => Logger::INFO,
-      :warn  => Logger::WARN,
-      :error => Logger::ERROR,
-      :fatal => Logger::FATAL,
+      debug: Logger::DEBUG,
+      info: Logger::INFO,
+      warn: Logger::WARN,
+      error: Logger::ERROR,
+      fatal: Logger::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level(symbol)
@@ -121,17 +121,17 @@ describe Mixlib::Log do
   end
 
   it "should raise an ArgumentError if you try and set the level to something strange using the binding form" do
-    expect(lambda { Logit.level = :the_roots }).to raise_error(ArgumentError)
+    expect(-> { Logit.level = :the_roots }).to raise_error(ArgumentError)
   end
 
   it "should raise an ArgumentError if you try and set the level to something strange using the method form" do
-    expect(lambda { Logit.level(:the_roots) }).to raise_error(ArgumentError)
+    expect(-> { Logit.level(:the_roots) }).to raise_error(ArgumentError)
   end
 
   it "should pass other method calls directly to logger" do
     Logit.level = :debug
     expect(Logit).to be_debug
-    expect(lambda { Logit.debug("Gimme some sugar!") }).to_not raise_error
+    expect(-> { Logit.debug("Gimme some sugar!") }).to_not raise_error
   end
 
   it "should pass add method calls directly to logger" do
@@ -139,7 +139,7 @@ describe Mixlib::Log do
     Logit.init(logdev)
     Logit.level = :debug
     expect(Logit).to be_debug
-    expect(lambda { Logit.add(Logger::DEBUG, "Gimme some sugar!") }).to_not raise_error
+    expect(-> { Logit.add(Logger::DEBUG, "Gimme some sugar!") }).to_not raise_error
     expect(logdev.string).to match(/Gimme some sugar/)
   end
 
@@ -186,5 +186,4 @@ describe Mixlib::Log do
     end
     expect(opened_files_count_after).to eq(opened_files_count_before + 1)
   end
-
 end

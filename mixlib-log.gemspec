@@ -1,4 +1,4 @@
-$:.unshift File.expand_path("../lib", __FILE__)
+$LOAD_PATH.unshift File.expand_path("../lib", __FILE__)
 require "mixlib/log/version"
 
 Gem::Specification.new do |gem|
@@ -16,7 +16,7 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 2.2"
   gem.add_development_dependency "rake"
   gem.add_development_dependency "rspec", "~> 3.4"
-  gem.add_development_dependency "chefstyle"
+  gem.add_development_dependency "chefstyle", ">= 0.6"
   gem.add_development_dependency "cucumber"
   gem.add_development_dependency "github_changelog_generator", ">= 1.11.3"
 end
