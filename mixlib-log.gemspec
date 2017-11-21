@@ -15,7 +15,7 @@ Gem::Specification.new do |gem|
   gem.files = Dir["lib/**/*"] + Dir["spec/**/*"] + ["Gemfile", "Rakefile", ".gemtest", "mixlib-log.gemspec"]
   gem.required_ruby_version = ">= 2.2"
   gem.add_development_dependency "rake"
-  gem.add_development_dependency "rspec", "~> 3.4"
+  gem.add_development_dependency "rspec", "~> 3.7"
   gem.add_development_dependency "chefstyle"
   gem.add_development_dependency "cucumber"
   gem.add_development_dependency "github_changelog_generator", ">= 1.11.3"
