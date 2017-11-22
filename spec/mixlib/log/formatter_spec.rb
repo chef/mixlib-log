@@ -19,7 +19,7 @@
 require "time"
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "spec_helper"))
 
-describe Mixlib::Log::Formatter do
+RSpec.describe Mixlib::Log::Formatter do
   before(:each) do
     @formatter = Mixlib::Log::Formatter.new
   end

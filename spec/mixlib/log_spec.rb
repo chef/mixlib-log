@@ -37,7 +37,7 @@ class LoggerLike
   end
 end
 
-describe Mixlib::Log do
+RSpec.describe Mixlib::Log do
 
   # Since we are testing class behaviour for an instance variable
   # that gets set once, we need to reset it prior to each example [cb]
