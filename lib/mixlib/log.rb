@@ -94,6 +94,7 @@ module Mixlib
 
     # Sets the level for the Logger object by symbol.  Valid arguments are:
     #
+    #  :trace
     #  :debug
     #  :info
     #  :warn
@@ -103,7 +104,7 @@ module Mixlib
     # Throws an ArgumentError if you feed it a bogus log level.
     def level=(new_level)
       level_int = LEVEL_NAMES.key?(new_level) ? new_level : LEVELS[new_level]
-      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if level_int.nil?
+      raise ArgumentError, "Log level must be one of :trace, :debug, :info, :warn, :error, or :fatal" if level_int.nil?
       loggers.each { |l| l.level = level_int }
     end
 
@@ -119,7 +120,7 @@ module Mixlib
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
-    [:debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+    [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
       class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}
           logger.#{method_name}

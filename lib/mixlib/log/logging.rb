@@ -21,7 +21,19 @@ module Mixlib
   module Log
     module Logging
 
-      LEVELS = { :debug => Logger::DEBUG, :info => Logger::INFO, :warn => Logger::WARN, :error => Logger::ERROR, :fatal => Logger::FATAL }.freeze
+      module Severity
+        include ::Logger::Severity
+        TRACE = -1
+
+        SEV_LABEL = %w{TRACE DEBUG INFO WARN ERROR FATAL ANY}.each(&:freeze).freeze
+
+        def to_label(sev)
+          SEV_LABEL[sev + 1] || -"ANY"
+        end
+      end
+      include Severity
+
+      LEVELS = { :trace => TRACE, :debug => DEBUG, :info => INFO, :warn => WARN, :error => ERROR, :fatal => FATAL }.freeze
       LEVEL_NAMES = LEVELS.invert.freeze
 
       attr_accessor :metadata
@@ -33,7 +45,7 @@ module Mixlib
 
       # Define the standard logger methods on this class programmatically.
       # No need to incur method_missing overhead on every log call.
-      [:debug, :info, :warn, :error, :fatal].each do |method_name|
+      [:trace, :debug, :info, :warn, :error, :fatal].each do |method_name|
         level = LEVELS[method_name]
         class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}(msg=nil, data: {}, &block)

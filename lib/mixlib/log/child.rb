@@ -35,7 +35,7 @@ module Mixlib
       # Note that we *only* query the default logger (@logger) and not any other
       # loggers that may have been added, even though it is possible to configure
       # two (or more) loggers at different log levels.
-      [:debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+      [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
         class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
           def #{method_name}
             parent.send(:#{method_name})
