@@ -25,7 +25,19 @@ module Mixlib
 
     @logger, @loggers = nil
 
-    LEVELS = { :debug => Logger::DEBUG, :info => Logger::INFO, :warn => Logger::WARN, :error => Logger::ERROR, :fatal => Logger::FATAL }.freeze
+    module Severity
+      include ::Logger::Severity
+      TRACE = -1
+
+      SEV_LABEL = %w{TRACE DEBUG INFO WARN ERROR FATAL ANY}.each(&:freeze).freeze
+
+      def to_label(sev)
+        SEV_LABEL[sev + 1] || -"ANY"
+      end
+    end
+    include Severity
+
+    LEVELS = { :trace => TRACE, :debug => DEBUG, :info => INFO, :warn => WARN, :error => ERROR, :fatal => FATAL }.freeze
     LEVEL_NAMES = LEVELS.invert.freeze
 
     def reset!
@@ -92,6 +104,7 @@ module Mixlib
 
     # Sets the level for the Logger object by symbol.  Valid arguments are:
     #
+    #  :trace
     #  :debug
     #  :info
     #  :warn
@@ -101,7 +114,7 @@ module Mixlib
     # Throws an ArgumentError if you feed it a bogus log level.
     def level=(new_level)
       level_int = LEVEL_NAMES.key?(new_level) ? new_level : LEVELS[new_level]
-      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if level_int.nil?
+      raise ArgumentError, "Log level must be one of :trace, :debug, :info, :warn, :error, or :fatal" if level_int.nil?
       loggers.each { |l| l.level = level_int }
     end
 
@@ -115,7 +128,7 @@ module Mixlib
 
     # Define the standard logger methods on this class programmatically.
     # No need to incur method_missing overhead on every log call.
-    [:debug, :info, :warn, :error, :fatal].each do |method_name|
+    [:trace, :debug, :info, :warn, :error, :fatal].each do |method_name|
       class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}(msg=nil, &block)
           loggers.each {|l| l.#{method_name}(msg, &block) }
@@ -127,7 +140,7 @@ module Mixlib
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
-    [:debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+    [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
       class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
         def #{method_name}
           logger.#{method_name}
