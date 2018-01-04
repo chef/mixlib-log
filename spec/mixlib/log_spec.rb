@@ -28,7 +28,7 @@ class LoggerLike
     @messages = ""
   end
 
-  [:debug, :info, :warn, :error, :fatal].each do |method_name|
+  [:trace, :debug, :info, :warn, :error, :fatal].each do |method_name|
     class_eval(<<-E)
       def #{method_name}(message)
         @messages << message
@@ -84,13 +84,14 @@ RSpec.describe Mixlib::Log do
     expect(Logit.configured?).to be true
   end
 
-  it "should set the log level using the binding form,  with :debug, :info, :warn, :error, or :fatal" do
+  it "should set the log level using the binding form,  with :trace, :debug, :info, :warn, :error, or :fatal" do
     levels = {
-      :debug => Logger::DEBUG,
-      :info  => Logger::INFO,
-      :warn  => Logger::WARN,
-      :error => Logger::ERROR,
-      :fatal => Logger::FATAL,
+      :trace => Mixlib::Log::TRACE,
+      :debug => Mixlib::Log::DEBUG,
+      :info  => Mixlib::Log::INFO,
+      :warn  => Mixlib::Log::WARN,
+      :error => Mixlib::Log::ERROR,
+      :fatal => Mixlib::Log::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level = symbol
@@ -106,13 +107,14 @@ RSpec.describe Mixlib::Log do
     expect(logdev.string).to match(/the_message/)
   end
 
-  it "should set the log level using the method form, with :debug, :info, :warn, :error, or :fatal" do
+  it "should set the log level using the method form, with :trace, :debug, :info, :warn, :error, or :fatal" do
     levels = {
-      :debug => Logger::DEBUG,
-      :info  => Logger::INFO,
-      :warn  => Logger::WARN,
-      :error => Logger::ERROR,
-      :fatal => Logger::FATAL,
+      :trace => Mixlib::Log::TRACE,
+      :debug => Mixlib::Log::DEBUG,
+      :info  => Mixlib::Log::INFO,
+      :warn  => Mixlib::Log::WARN,
+      :error => Mixlib::Log::ERROR,
+      :fatal => Mixlib::Log::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level(symbol)
