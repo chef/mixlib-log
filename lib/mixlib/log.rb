@@ -19,6 +19,7 @@
 require "logger"
 require "mixlib/log/version"
 require "mixlib/log/formatter"
+require "mixlib/log/child"
 
 module Mixlib
   module Log
@@ -69,6 +70,19 @@ module Mixlib
       @configured = true
     end
 
+    def with_child
+      child = Child.new(self)
+      if block_given?
+        yield child
+      else
+        child
+      end
+    end
+
+    def pass(severity, args, progname = nil, &block)
+      add(severity, args, progname, &block)
+    end
+
     # Use Mixlib::Log.init when you want to set up the logger manually.  Arguments to this method
     # get passed directly to Logger.new, so check out the documentation for the standard Logger class
     # to understand what to do here.
@@ -82,6 +96,7 @@ module Mixlib
       @logger.formatter = Mixlib::Log::Formatter.new() if @logger.respond_to?(:formatter=)
       @logger.level = Logger::WARN
       @configured = true
+      @parent = nil
       @logger
     end
 
