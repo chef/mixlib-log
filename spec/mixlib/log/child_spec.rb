@@ -39,10 +39,49 @@ RSpec.describe Mixlib::Log::Child do
     expect(io.string).to match(/a message$/)
   end
 
+  context "with structured data" do
+    it "can be created with metadata" do
+      expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true" })
+      Logit.with_child({ child: "true" }) { |l| l.warn("a message") }
+    end
+
+    it "a message can be logged" do
+      expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true" })
+      Logit.with_child { |l| l.warn("a message", data: { child: "true" }) }
+    end
+
+    context "merges properly" do
+      it "in the simple case" do
+        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", meta: "data" })
+        Logit.with_child(meta: "data") { |l| l.warn("a message", data: { child: "true" }) }
+      end
+
+      it "when overwriting" do
+        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", meta: "overwritten" })
+        Logit.with_child(meta: "data") { |l| l.warn("a message", data: { child: "true", meta: "overwritten" }) }
+      end
+    end
+
+    context "when receiving a message from a child" do
+      it "passes data on" do
+        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", parent: "first" })
+        child.metadata = { parent: "first" }
+        child.with_child { |l| l.warn("a message", data: { child: "true" }) }
+      end
+
+      it "merges its own data" do
+        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", parent: "second" })
+        child.metadata = { parent: "first" }
+        child.with_child { |l| l.warn("a message", data: { child: "true", parent: "second" }) }
+      end
+    end
+  end
+
   context "sends a message to the parent" do
     %i{ debug info warn error fatal }.each do |level|
       it "at #{level}" do
-        expect(Logit).to receive(:pass).with(level, "a #{level} message", nil)
+        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[level], "a #{level} message", nil, data: {})
+        Logit.level = level
         child.send(level, "a #{level} message")
       end
     end

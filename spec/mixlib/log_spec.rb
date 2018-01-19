@@ -23,9 +23,19 @@ require "spec_helper"
 
 class LoggerLike
   attr_accessor :level
-  attr_reader :messages
+  attr_reader :messages, :data
   def initialize
     @messages = ""
+    @data = []
+  end
+
+  def add_data(severity, message = nil, progname = nil, data: {})
+    @messages << message
+    @data << data
+  end
+
+  def add(severity, message = nil, progname = nil, data: {})
+    @messages << message
   end
 
   [:debug, :info, :warn, :error, :fatal].each do |method_name|
@@ -64,6 +74,7 @@ RSpec.describe Mixlib::Log do
   it "uses the logger provided when initialized with a logger like object" do
     logger = LoggerLike.new
     Logit.init(logger)
+    Logit.level = :debug
     Logit.debug "qux"
     expect(logger.messages).to match(/qux/)
   end

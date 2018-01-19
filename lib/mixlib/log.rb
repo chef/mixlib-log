@@ -20,14 +20,13 @@ require "logger"
 require "mixlib/log/version"
 require "mixlib/log/formatter"
 require "mixlib/log/child"
+require "mixlib/log/logging"
 
 module Mixlib
   module Log
 
+    include Logging
     @logger, @loggers = nil
-
-    LEVELS = { :debug => Logger::DEBUG, :info => Logger::INFO, :warn => Logger::WARN, :error => Logger::ERROR, :fatal => Logger::FATAL }.freeze
-    LEVEL_NAMES = LEVELS.invert.freeze
 
     def reset!
       close!
@@ -70,19 +69,6 @@ module Mixlib
       @configured = true
     end
 
-    def with_child
-      child = Child.new(self)
-      if block_given?
-        yield child
-      else
-        child
-      end
-    end
-
-    def pass(severity, args, progname = nil, &block)
-      add(severity, args, progname, &block)
-    end
-
     # Use Mixlib::Log.init when you want to set up the logger manually.  Arguments to this method
     # get passed directly to Logger.new, so check out the documentation for the standard Logger class
     # to understand what to do here.
@@ -97,6 +83,7 @@ module Mixlib
       @logger.level = Logger::WARN
       @configured = true
       @parent = nil
+      @metadata = {}
       @logger
     end
 
@@ -128,16 +115,6 @@ module Mixlib
       end
     end
 
-    # Define the standard logger methods on this class programmatically.
-    # No need to incur method_missing overhead on every log call.
-    [:debug, :info, :warn, :error, :fatal].each do |method_name|
-      class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
-        def #{method_name}(msg=nil, &block)
-          loggers.each {|l| l.#{method_name}(msg, &block) }
-        end
-      METHOD_DEFN
-    end
-
     # Define the methods to interrogate the logger for the current log level.
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
@@ -154,8 +131,16 @@ module Mixlib
       loggers.each { |l| l << msg }
     end
 
-    def add(severity, message = nil, progname = nil, &block)
-      loggers.each { |l| l.add(severity, message, progname, &block) }
+    def add(severity, message = nil, progname = nil, data: {}, &block)
+      message, progname, data = yield if block_given?
+      data = metadata.merge(data) if data.kind_of?(Hash)
+      loggers.each do |l|
+        if l.respond_to?(:add_data)
+          l.add_data(severity, message, progname, data: data)
+        else
+          l.add(severity, message, progname)
+        end
+      end
     end
 
     alias :log :add
