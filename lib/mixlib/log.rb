@@ -133,9 +133,11 @@ module Mixlib
 
     def add(severity, message = nil, progname = nil, data: {}, &block)
       message, progname, data = yield if block_given?
-      data = metadata.merge(data) if data.kind_of?(Hash)
+      data = metadata.merge(data) if metadata.kind_of?(Hash) && data.kind_of?(Hash)
       loggers.each do |l|
-        if l.respond_to?(:add_data)
+        # if we don't have any metadata, let's not do the potentially expensive
+        # merging and managing that this call requires
+        if l.respond_to?(:add_data) && !data.nil? && !data.empty?
           l.add_data(severity, message, progname, data: data)
         else
           l.add(severity, message, progname)
