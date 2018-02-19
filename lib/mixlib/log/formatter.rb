@@ -46,7 +46,9 @@ module Mixlib
           if msg.has_key?(:err)
             format_exception(msg[:err])
           else
-            msg[:msg]
+            m = "#{msg.delete(:msg)}\n"
+            msg.each_entry { |k, v| m << "#{k}: #{v}, " }
+            m
           end
         when ::String
           msg
