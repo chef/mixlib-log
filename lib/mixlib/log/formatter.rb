@@ -42,14 +42,24 @@ module Mixlib
       # put through "object.inspect"
       def msg2str(msg)
         case msg
+        when ::Hash
+          if msg.has_key?(:err)
+            format_exception(msg[:err])
+          else
+            msg[:msg]
+          end
         when ::String
           msg
         when ::Exception
-          "#{msg.message} (#{msg.class})\n" <<
-            (msg.backtrace || []).join("\n")
+          format_exception(msg)
         else
           msg.inspect
         end
+      end
+
+      def format_exception(msg)
+        "#{msg.message} (#{msg.class})\n" <<
+          (msg.backtrace || []).join("\n")
       end
     end
   end

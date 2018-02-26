@@ -48,4 +48,17 @@ RSpec.describe Mixlib::Log::Formatter do
     expect(@formatter.call("monkey", Time.new, "test", "mos def")).to eq("monkey: mos def\n")
   end
 
+  context "with structured data" do
+    let(:data) { {} }
+
+    it "should format a message" do
+      data[:msg] = "nuthin new"
+      expect(@formatter.msg2str(data)).to eq("nuthin new")
+    end
+
+    it "should format an exception" do
+      data[:err] = IOError.new("legendary roots crew")
+      expect(@formatter.msg2str(data)).to eq("legendary roots crew (IOError)\n")
+    end
+  end
 end

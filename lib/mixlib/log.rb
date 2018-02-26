@@ -19,14 +19,14 @@
 require "logger"
 require "mixlib/log/version"
 require "mixlib/log/formatter"
+require "mixlib/log/child"
+require "mixlib/log/logging"
 
 module Mixlib
   module Log
 
+    include Logging
     @logger, @loggers = nil
-
-    LEVELS = { :debug => Logger::DEBUG, :info => Logger::INFO, :warn => Logger::WARN, :error => Logger::ERROR, :fatal => Logger::FATAL }.freeze
-    LEVEL_NAMES = LEVELS.invert.freeze
 
     def reset!
       close!
@@ -82,6 +82,8 @@ module Mixlib
       @logger.formatter = Mixlib::Log::Formatter.new() if @logger.respond_to?(:formatter=)
       @logger.level = Logger::WARN
       @configured = true
+      @parent = nil
+      @metadata = {}
       @logger
     end
 
@@ -92,6 +94,7 @@ module Mixlib
 
     # Sets the level for the Logger object by symbol.  Valid arguments are:
     #
+    #  :trace
     #  :debug
     #  :info
     #  :warn
@@ -101,7 +104,7 @@ module Mixlib
     # Throws an ArgumentError if you feed it a bogus log level.
     def level=(new_level)
       level_int = LEVEL_NAMES.key?(new_level) ? new_level : LEVELS[new_level]
-      raise ArgumentError, "Log level must be one of :debug, :info, :warn, :error, or :fatal" if level_int.nil?
+      raise ArgumentError, "Log level must be one of :trace, :debug, :info, :warn, :error, or :fatal" if level_int.nil?
       loggers.each { |l| l.level = level_int }
     end
 
@@ -113,37 +116,44 @@ module Mixlib
       end
     end
 
-    # Define the standard logger methods on this class programmatically.
-    # No need to incur method_missing overhead on every log call.
-    [:debug, :info, :warn, :error, :fatal].each do |method_name|
-      class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
-        def #{method_name}(msg=nil, &block)
-          loggers.each {|l| l.#{method_name}(msg, &block) }
-        end
-      METHOD_DEFN
-    end
-
     # Define the methods to interrogate the logger for the current log level.
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
-    [:debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
-      class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
-        def #{method_name}
-          logger.#{method_name}
-        end
-      METHOD_DEFN
+    [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+      define_method(method_name) do
+        logger.send(method_name)
+      end
     end
 
     def <<(msg)
       loggers.each { |l| l << msg }
     end
 
-    def add(severity, message = nil, progname = nil, &block)
-      loggers.each { |l| l.add(severity, message, progname, &block) }
+    def add(severity, message = nil, progname = nil, data: {}, &block)
+      message, progname, data = yield if block_given?
+      data = metadata.merge(data) if metadata.kind_of?(Hash) && data.kind_of?(Hash)
+      loggers.each do |l|
+        # if we don't have any metadata, let's not do the potentially expensive
+        # merging and managing that this call requires
+        if l.respond_to?(:add_data) && !data.nil? && !data.empty?
+          l.add_data(severity, message, progname, data: data)
+        else
+          l.add(severity, message, progname)
+        end
+      end
     end
 
     alias :log :add
+
+    def with_child(metadata = {})
+      child = Child.new(self, metadata)
+      if block_given?
+        yield child
+      else
+        child
+      end
+    end
 
     # Passes any other method calls on directly to the underlying Logger object created with init. If
     # this method gets hit before a call to Mixlib::Logger.init has been made, it will call
