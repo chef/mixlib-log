@@ -121,11 +121,9 @@ module Mixlib
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
     [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
-      class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
-        def #{method_name}
-          logger.#{method_name}
-        end
-      METHOD_DEFN
+      define_method(method_name) do
+        logger.send(method_name)
+      end
     end
 
     def <<(msg)
@@ -147,6 +145,15 @@ module Mixlib
     end
 
     alias :log :add
+
+    def with_child(metadata = {})
+      child = Child.new(self, metadata)
+      if block_given?
+        yield child
+      else
+        child
+      end
+    end
 
     # Passes any other method calls on directly to the underlying Logger object created with init. If
     # this method gets hit before a call to Mixlib::Logger.init has been made, it will call

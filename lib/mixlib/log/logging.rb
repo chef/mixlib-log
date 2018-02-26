@@ -15,23 +15,19 @@
 # limitations under the License.
 
 require "logger"
-require "mixlib/log/child"
 
 module Mixlib
   module Log
     module Logging
+      include ::Logger::Severity
 
-      module Severity
-        include ::Logger::Severity
-        TRACE = -1
+      TRACE = -1
 
-        SEV_LABEL = %w{TRACE DEBUG INFO WARN ERROR FATAL ANY}.each(&:freeze).freeze
+      SEV_LABEL = %w{TRACE DEBUG INFO WARN ERROR FATAL ANY}.each(&:freeze).freeze
 
-        def to_label(sev)
-          SEV_LABEL[sev + 1] || -"ANY"
-        end
+      def to_label(sev)
+        SEV_LABEL[sev + 1] || -"ANY"
       end
-      include Severity
 
       LEVELS = { :trace => TRACE, :debug => DEBUG, :info => INFO, :warn => WARN, :error => ERROR, :fatal => FATAL }.freeze
       LEVEL_NAMES = LEVELS.invert.freeze
@@ -47,19 +43,8 @@ module Mixlib
       # No need to incur method_missing overhead on every log call.
       [:trace, :debug, :info, :warn, :error, :fatal].each do |method_name|
         level = LEVELS[method_name]
-        class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
-        def #{method_name}(msg=nil, data: {}, &block)
-          pass(#{level}, msg, data: data, &block)
-        end
-        METHOD_DEFN
-      end
-
-      def with_child(metadata = {})
-        child = Child.new(self, metadata)
-        if block_given?
-          yield child
-        else
-          child
+        define_method(method_name) do |msg = nil, data: {}, &block|
+          pass(level, msg, data: data, &block)
         end
       end
 

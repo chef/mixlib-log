@@ -36,16 +36,23 @@ module Mixlib
       # loggers that may have been added, even though it is possible to configure
       # two (or more) loggers at different log levels.
       [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
-        class_eval(<<-METHOD_DEFN, __FILE__, __LINE__)
-          def #{method_name}
-            parent.send(:#{method_name})
-          end
-        METHOD_DEFN
+        define_method(method_name) do
+          parent.send(method_name)
+        end
       end
 
       def add(severity, message = nil, progname = nil, data: {}, &block)
         data = metadata.merge(data) if data.kind_of?(Hash)
         parent.send(:pass, severity, message, progname, data: data, &block)
+      end
+
+      def with_child(metadata = {})
+        child = Child.new(self, metadata)
+        if block_given?
+          yield child
+        else
+          child
+        end
       end
 
     end

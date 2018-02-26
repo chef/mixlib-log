@@ -1,4 +1,5 @@
 require "logger"
+require "mixlib/log/logging"
 
 # A subclass of Ruby's stdlib Logger with all the mutex and logrotation stuff
 # ripped out, and metadata added in.
@@ -6,6 +7,7 @@ module Mixlib
   module Log
     class Logger < ::Logger
 
+      include Logging
       #
       # === Synopsis
       #
@@ -50,6 +52,7 @@ module Mixlib
           format_message(format_severity(severity), Time.now, progname, data))
         true
       end
+      alias_method :add, :add_data
 
       class LocklessLogDevice < LogDevice
 
