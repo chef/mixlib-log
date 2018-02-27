@@ -1,16 +1,27 @@
 # Change Log
 
-## [1.7.1](https://github.com/chef/mixlib-log/tree/1.7.1) (2016-08-12)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.7.0...1.7.1)
+## [2.0.0](https://github.com/chef/mixlib-log/tree/2.0.0) (2018-02-26)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.7.1...2.0.0)
+
+**Merged pull requests:**
+
+- Structured Logging [\#30](https://github.com/chef/mixlib-log/pull/30) ([thommay](https://github.com/thommay))
+- RSpec: use 3.7, disable monkey patching mode [\#28](https://github.com/chef/mixlib-log/pull/28) ([olleolleolle](https://github.com/olleolleolle))
+- README: Format a line of code using Markdown, not RDoc [\#24](https://github.com/chef/mixlib-log/pull/24) ([olleolleolle](https://github.com/olleolleolle))
+- Travis: update Ruby versions, pass lint [\#22](https://github.com/chef/mixlib-log/pull/22) ([olleolleolle](https://github.com/olleolleolle))
+- Require Ruby 2.2+ [\#20](https://github.com/chef/mixlib-log/pull/20) ([tas50](https://github.com/tas50))
+
+## [v1.7.1](https://github.com/chef/mixlib-log/tree/v1.7.1) (2016-08-12)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.7.0...v1.7.1)
 
 **Merged pull requests:**
 
 - Allow applications to query if they've got loggers [\#18](https://github.com/chef/mixlib-log/pull/18) ([thommay](https://github.com/thommay))
 
-## [1.7.0](https://github.com/chef/mixlib-log/tree/1.7.0) (2016-08-04)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/1.4.1...1.7.0)
+## [v1.7.0](https://github.com/chef/mixlib-log/tree/v1.7.0) (2016-08-04)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/1.4.1...v1.7.0)
 
-**Implemented enhancements:**
+**Merged pull requests:**
 
 - test with updated ruby versions and run cucumber [\#16](https://github.com/chef/mixlib-log/pull/16) ([thommay](https://github.com/thommay))
 - Add dev dependency on chefstyle [\#15](https://github.com/chef/mixlib-log/pull/15) ([tas50](https://github.com/tas50))
@@ -18,9 +29,6 @@
 - File log devices opened by mixlib-log should be closed. [\#13](https://github.com/chef/mixlib-log/pull/13) ([mhorbul](https://github.com/mhorbul))
 - Include the license type in the .gemspec [\#9](https://github.com/chef/mixlib-log/pull/9) ([benders](https://github.com/benders))
 - MIXLIB-10: don't be so pessimistic about development libraries [\#8](https://github.com/chef/mixlib-log/pull/8) ([jkeiser](https://github.com/jkeiser))
-
-**Fixed bugs:**
-
 - Ensure that arguments to Mixlib::Log\#add are passed as is to all loggers [\#7](https://github.com/chef/mixlib-log/pull/7) ([ketan](https://github.com/ketan))
 - Fixing RDoc formatting of README.rdoc. [\#4](https://github.com/chef/mixlib-log/pull/4) ([ampledata](https://github.com/ampledata))
 
@@ -30,7 +38,7 @@
 ## [1.4.0](https://github.com/chef/mixlib-log/tree/1.4.0) (2012-06-08)
 [Full Changelog](https://github.com/chef/mixlib-log/compare/1.3.0...1.4.0)
 
-**Implemented enhancements:**
+**Merged pull requests:**
 
 - Inconsistent documentation about default base log level [\#5](https://github.com/chef/mixlib-log/pull/5) ([bjoernalbers](https://github.com/bjoernalbers))
 
@@ -38,31 +46,31 @@
 [Full Changelog](https://github.com/chef/mixlib-log/compare/1.2.0...1.3.0)
 
 ## [1.2.0](https://github.com/chef/mixlib-log/tree/1.2.0) (2010-10-15)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/1.1.0...1.2.0)
-
-## [1.1.0](https://github.com/chef/mixlib-log/tree/1.1.0) (2010-02-28)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/beta-1...1.1.0)
-
-## [beta-1](https://github.com/chef/mixlib-log/tree/beta-1) (2010-02-28)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_4...beta-1)
-
-## [alpha_deploy_4](https://github.com/chef/mixlib-log/tree/alpha_deploy_4) (2010-02-28)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_3...alpha_deploy_4)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_3...1.2.0)
 
 ## [alpha_deploy_3](https://github.com/chef/mixlib-log/tree/alpha_deploy_3) (2010-02-28)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_2...alpha_deploy_3)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_4...alpha_deploy_3)
+
+## [alpha_deploy_4](https://github.com/chef/mixlib-log/tree/alpha_deploy_4) (2010-02-28)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/beta-1...alpha_deploy_4)
+
+## [beta-1](https://github.com/chef/mixlib-log/tree/beta-1) (2010-02-28)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/1.1.0...beta-1)
+
+## [1.1.0](https://github.com/chef/mixlib-log/tree/1.1.0) (2010-02-28)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_2...1.1.0)
 
 ## [alpha_deploy_2](https://github.com/chef/mixlib-log/tree/alpha_deploy_2) (2010-02-28)
 [Full Changelog](https://github.com/chef/mixlib-log/compare/v1.1.0...alpha_deploy_2)
 
 ## [v1.1.0](https://github.com/chef/mixlib-log/tree/v1.1.0) (2010-01-05)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_1...v1.1.0)
-
-## [alpha_deploy_1](https://github.com/chef/mixlib-log/tree/alpha_deploy_1) (2009-05-12)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.3...alpha_deploy_1)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.3...v1.1.0)
 
 ## [v1.0.3](https://github.com/chef/mixlib-log/tree/v1.0.3) (2009-05-12)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.2...v1.0.3)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_1...v1.0.3)
+
+## [alpha_deploy_1](https://github.com/chef/mixlib-log/tree/alpha_deploy_1) (2009-05-12)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.2...alpha_deploy_1)
 
 ## [v1.0.2](https://github.com/chef/mixlib-log/tree/v1.0.2) (2009-05-12)
 
