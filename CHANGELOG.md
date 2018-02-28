@@ -1,7 +1,15 @@
 # Change Log
 
-## [2.0.0](https://github.com/chef/mixlib-log/tree/2.0.0) (2018-02-26)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.7.1...2.0.0)
+## [2.0.1](https://github.com/chef/mixlib-log/tree/2.0.1) (2018-02-28)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v2.0.0...2.0.1)
+
+**Merged pull requests:**
+
+- enable metadata to be got and set [\#32](https://github.com/chef/mixlib-log/pull/32) ([thommay](https://github.com/thommay))
+- Logging methods \(debug, info, warn, error, fatal\) all return nil [\#27](https://github.com/chef/mixlib-log/pull/27) ([olleolleolle](https://github.com/olleolleolle))
+
+## [v2.0.0](https://github.com/chef/mixlib-log/tree/v2.0.0) (2018-02-27)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.7.1...v2.0.0)
 
 **Merged pull requests:**
 
@@ -16,6 +24,7 @@
 
 **Merged pull requests:**
 
+- Release 1.7.1 [\#19](https://github.com/chef/mixlib-log/pull/19) ([mwrock](https://github.com/mwrock))
 - Allow applications to query if they've got loggers [\#18](https://github.com/chef/mixlib-log/pull/18) ([thommay](https://github.com/thommay))
 
 ## [v1.7.0](https://github.com/chef/mixlib-log/tree/v1.7.0) (2016-08-04)
@@ -46,7 +55,10 @@
 [Full Changelog](https://github.com/chef/mixlib-log/compare/1.2.0...1.3.0)
 
 ## [1.2.0](https://github.com/chef/mixlib-log/tree/1.2.0) (2010-10-15)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_3...1.2.0)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_2...1.2.0)
+
+## [alpha_deploy_2](https://github.com/chef/mixlib-log/tree/alpha_deploy_2) (2010-02-28)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_3...alpha_deploy_2)
 
 ## [alpha_deploy_3](https://github.com/chef/mixlib-log/tree/alpha_deploy_3) (2010-02-28)
 [Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_4...alpha_deploy_3)
@@ -58,19 +70,16 @@
 [Full Changelog](https://github.com/chef/mixlib-log/compare/1.1.0...beta-1)
 
 ## [1.1.0](https://github.com/chef/mixlib-log/tree/1.1.0) (2010-02-28)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_2...1.1.0)
-
-## [alpha_deploy_2](https://github.com/chef/mixlib-log/tree/alpha_deploy_2) (2010-02-28)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.1.0...alpha_deploy_2)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.1.0...1.1.0)
 
 ## [v1.1.0](https://github.com/chef/mixlib-log/tree/v1.1.0) (2010-01-05)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.3...v1.1.0)
-
-## [v1.0.3](https://github.com/chef/mixlib-log/tree/v1.0.3) (2009-05-12)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_1...v1.0.3)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/alpha_deploy_1...v1.1.0)
 
 ## [alpha_deploy_1](https://github.com/chef/mixlib-log/tree/alpha_deploy_1) (2009-05-12)
-[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.2...alpha_deploy_1)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.3...alpha_deploy_1)
+
+## [v1.0.3](https://github.com/chef/mixlib-log/tree/v1.0.3) (2009-05-12)
+[Full Changelog](https://github.com/chef/mixlib-log/compare/v1.0.2...v1.0.3)
 
 ## [v1.0.2](https://github.com/chef/mixlib-log/tree/v1.0.2) (2009-05-12)
 
