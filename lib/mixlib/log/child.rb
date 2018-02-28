@@ -22,6 +22,7 @@ module Mixlib
       include Mixlib::Log::Logging
 
       attr_reader :parent
+      attr_accessor :metadata
       def initialize(parent, metadata = {})
         @parent = parent
         @metadata = metadata

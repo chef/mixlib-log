@@ -31,6 +31,7 @@ module Mixlib
     def reset!
       close!
       @logger, @loggers = nil, nil
+      @metadata = {}
     end
 
     # An Array of log devices that will be logged to. Defaults to just the default
@@ -91,6 +92,8 @@ module Mixlib
     def configured?
       @configured
     end
+
+    attr_accessor :metadata
 
     # Sets the level for the Logger object by symbol.  Valid arguments are:
     #
