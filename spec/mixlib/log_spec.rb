@@ -213,4 +213,10 @@ RSpec.describe Mixlib::Log do
       expect(Logit.fatal("hello")).to be_nil
     end
   end
+
+  it "should set metadata correctly" do
+    Logit.metadata = { test: "data" }
+    expect(Logit.metadata).to eql({ test: "data" })
+  end
+
 end
