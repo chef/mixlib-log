@@ -200,4 +200,17 @@ RSpec.describe Mixlib::Log do
     expect(opened_files_count_after).to eq(opened_files_count_before + 1)
   end
 
+  it "should return nil from its logging methods" do
+    expect(Logger).to receive(:new).with(STDOUT) { double("a-quiet-logger").as_null_object }
+    Logit.init
+
+    aggregate_failures "returns nil from logging method" do
+      expect(Logit.trace("hello")).to be_nil
+      expect(Logit.debug("hello")).to be_nil
+      expect(Logit.info("hello")).to be_nil
+      expect(Logit.warn("hello")).to be_nil
+      expect(Logit.error("hello")).to be_nil
+      expect(Logit.fatal("hello")).to be_nil
+    end
+  end
 end

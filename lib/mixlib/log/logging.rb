@@ -45,6 +45,7 @@ module Mixlib
         level = LEVELS[method_name]
         define_method(method_name) do |msg = nil, data: {}, &block|
           pass(level, msg, data: data, &block)
+          nil
         end
       end
 
