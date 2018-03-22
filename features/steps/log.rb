@@ -16,11 +16,11 @@
 # limitations under the License.
 #
 
-Given /^a base log level of '(.+)'$/ do |level|
+Given(/^a base log level of '(.+)'$/) do |level|
   Logit.level = level.to_sym
 end
 
-When /^the message '(.+)' is sent at the '(.+)' level$/ do |message, level|
+When(/^the message '(.+)' is sent at the '(.+)' level$/) do |message, level|
   case level.to_sym
   when :debug
     Logit.debug(message)
@@ -37,11 +37,11 @@ When /^the message '(.+)' is sent at the '(.+)' level$/ do |message, level|
   end
 end
 
-Then /^the regex '(.+)' should be logged$/ do |regex_string|
+Then(/^the regex '(.+)' should be logged$/) do |regex_string|
   regex = Regexp.new(regex_string, Regexp::MULTILINE)
   expect(regex.match(@output)).not_to be_nil
 end
 
-Then /^nothing should be logged$/ do
+Then(/^nothing should be logged$/) do
   expect(@output).to eq ""
 end
