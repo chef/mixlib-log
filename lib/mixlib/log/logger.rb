@@ -8,6 +8,9 @@ module Mixlib
     class Logger < ::Logger
 
       include Logging
+
+      def trace?; @level <= TRACE; end
+
       #
       # === Synopsis
       #
