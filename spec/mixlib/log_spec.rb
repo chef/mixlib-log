@@ -221,4 +221,15 @@ RSpec.describe Mixlib::Log do
     expect(Logit.metadata).to eql({ test: "data" })
   end
 
+  it "should format :trace level messages with TRACE: label" do
+    logdev = StringIO.new
+    Logit.init(logdev)
+    Logit.level = :trace
+    Logit.trace("this is a log message")
+    aggregate_failures do
+      expect(logdev.string).to_not match(/ANY:/)
+      expect(logdev.string).to match(/TRACE:/)
+    end
+  end
+
 end
