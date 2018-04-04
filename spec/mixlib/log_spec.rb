@@ -174,9 +174,10 @@ RSpec.describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_before += 1 unless f.closed?
     end
-    Logit.init("/tmp/logger.log")
-    Logit.init("/tmp/logger.log")
-    Logit.init("/tmp/logger.log")
+    fn = File.join(ENV['TEMP'], "logger.log")
+    Logit.init(fn)
+    Logit.init(fn)
+    Logit.init(fn)
     opened_files_count_after = 0
     ObjectSpace.each_object(File) do |f|
       opened_files_count_after += 1 unless f.closed?
@@ -189,7 +190,8 @@ RSpec.describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_before += 1 unless f.closed?
     end
-    file = File.open("/tmp/logger.log")
+    fn = File.join(ENV['TEMP'], "logger.log")
+    file = File.open(fn)
     Logit.init(file)
     Logit.init(file)
     Logit.init(file)
