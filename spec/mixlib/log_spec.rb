@@ -174,9 +174,10 @@ RSpec.describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_before += 1 unless f.closed?
     end
-    Logit.init("/tmp/logger.log")
-    Logit.init("/tmp/logger.log")
-    Logit.init("/tmp/logger.log")
+    name = File.join(Dir.tmpdir, "logger.log")
+    Logit.init(name)
+    Logit.init(name)
+    Logit.init(name)
     opened_files_count_after = 0
     ObjectSpace.each_object(File) do |f|
       opened_files_count_after += 1 unless f.closed?
@@ -189,15 +190,16 @@ RSpec.describe Mixlib::Log do
     ObjectSpace.each_object(File) do |f|
       opened_files_count_before += 1 unless f.closed?
     end
-    file = File.open("/tmp/logger.log")
-    Logit.init(file)
-    Logit.init(file)
-    Logit.init(file)
-    opened_files_count_after = 0
-    ObjectSpace.each_object(File) do |f|
-      opened_files_count_after += 1 unless f.closed?
+    Tempfile.open("chef-test-log") do |file|
+      Logit.init(file)
+      Logit.init(file)
+      Logit.init(file)
+      opened_files_count_after = 0
+      ObjectSpace.each_object(File) do |f|
+        opened_files_count_after += 1 unless f.closed?
+      end
+      expect(opened_files_count_after).to eq(opened_files_count_before + 1)
     end
-    expect(opened_files_count_after).to eq(opened_files_count_before + 1)
   end
 
   it "should return nil from its logging methods" do
