@@ -21,6 +21,7 @@ require "mixlib/log/version"
 require "mixlib/log/formatter"
 require "mixlib/log/child"
 require "mixlib/log/logging"
+require "mixlib/log/logger"
 
 module Mixlib
   module Log
@@ -169,11 +170,11 @@ module Mixlib
 
     def logger_for(*opts)
       if opts.empty?
-        Logger.new(STDOUT)
+        Mixlib::Log::Logger.new(STDOUT)
       elsif LEVELS.keys.inject(true) { |quacks, level| quacks && opts.first.respond_to?(level) }
         opts.first
       else
-        Logger.new(*opts)
+        Mixlib::Log::Logger.new(*opts)
       end
     end
 
