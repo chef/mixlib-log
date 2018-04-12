@@ -1,9 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 2.0.4 -->
+## [v2.0.4](https://github.com/chef/mixlib-log/tree/v2.0.4) (2018-04-12)
+
+#### Merged Pull Requests
+- fix labelling [#37](https://github.com/chef/mixlib-log/pull/37) ([thommay](https://github.com/thommay))
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=2.0.3 -->
+### Changes since 2.0.3 release
+
+#### Merged Pull Requests
+- fix labelling [#37](https://github.com/chef/mixlib-log/pull/37) ([thommay](https://github.com/thommay)) <!-- 2.0.4 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
