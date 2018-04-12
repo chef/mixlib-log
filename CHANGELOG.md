@@ -1,20 +1,18 @@
 # Change Log
 
-<!-- latest_release 2.0.4 -->
+<!-- latest_release -->
+<!-- latest_release -->
+
+<!-- release_rollup -->
+<!-- release_rollup -->
+
+<!-- latest_stable_release -->
 ## [v2.0.4](https://github.com/chef/mixlib-log/tree/v2.0.4) (2018-04-12)
 
 #### Merged Pull Requests
 - fix labelling [#37](https://github.com/chef/mixlib-log/pull/37) ([thommay](https://github.com/thommay))
-<!-- latest_release -->
-
-<!-- release_rollup since=2.0.3 -->
-### Changes since 2.0.3 release
-
-#### Merged Pull Requests
-- fix labelling [#37](https://github.com/chef/mixlib-log/pull/37) ([thommay](https://github.com/thommay)) <!-- 2.0.4 -->
-<!-- release_rollup -->
-
 <!-- latest_stable_release -->
+
 ## [2.0.1](https://github.com/chef/mixlib-log/tree/2.0.1) (2018-02-28)
 [Full Changelog](https://github.com/chef/mixlib-log/compare/v2.0.0...2.0.1)
 
@@ -22,7 +20,6 @@
 
 - enable metadata to be got and set [\#32](https://github.com/chef/mixlib-log/pull/32) ([thommay](https://github.com/thommay))
 - Logging methods \(debug, info, warn, error, fatal\) all return nil [\#27](https://github.com/chef/mixlib-log/pull/27) ([olleolleolle](https://github.com/olleolleolle))
-<!-- latest_stable_release -->
 
 ## [v2.0.0](https://github.com/chef/mixlib-log/tree/v2.0.0) (2018-02-27)
 [Full Changelog](https://github.com/chef/mixlib-log/compare/v1.7.1...v2.0.0)
