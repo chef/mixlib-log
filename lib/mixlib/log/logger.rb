@@ -52,7 +52,7 @@ module Mixlib
           data[:msg] = message
         end
         @logdev.write(
-          format_message(format_severity(severity), Time.now, progname, data))
+          format_message(to_label(severity), Time.now, progname, data))
         true
       end
       alias_method :add, :add_data
