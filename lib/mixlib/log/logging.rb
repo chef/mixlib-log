@@ -29,7 +29,7 @@ module Mixlib
         SEV_LABEL[sev + 1] || -"ANY"
       end
 
-      LEVELS = { :trace => TRACE, :debug => DEBUG, :info => INFO, :warn => WARN, :error => ERROR, :fatal => FATAL }.freeze
+      LEVELS = { trace: TRACE, debug: DEBUG, info: INFO, warn: WARN, error: ERROR, fatal: FATAL }.freeze
       LEVEL_NAMES = LEVELS.invert.freeze
 
       attr_accessor :metadata
