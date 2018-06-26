@@ -97,12 +97,12 @@ RSpec.describe Mixlib::Log do
 
   it "should set the log level using the binding form,  with :trace, :debug, :info, :warn, :error, or :fatal" do
     levels = {
-      :trace => Mixlib::Log::TRACE,
-      :debug => Mixlib::Log::DEBUG,
-      :info  => Mixlib::Log::INFO,
-      :warn  => Mixlib::Log::WARN,
-      :error => Mixlib::Log::ERROR,
-      :fatal => Mixlib::Log::FATAL,
+      trace: Mixlib::Log::TRACE,
+      debug: Mixlib::Log::DEBUG,
+      info: Mixlib::Log::INFO,
+      warn: Mixlib::Log::WARN,
+      error: Mixlib::Log::ERROR,
+      fatal: Mixlib::Log::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level = symbol
@@ -120,12 +120,12 @@ RSpec.describe Mixlib::Log do
 
   it "should set the log level using the method form, with :trace, :debug, :info, :warn, :error, or :fatal" do
     levels = {
-      :trace => Mixlib::Log::TRACE,
-      :debug => Mixlib::Log::DEBUG,
-      :info  => Mixlib::Log::INFO,
-      :warn  => Mixlib::Log::WARN,
-      :error => Mixlib::Log::ERROR,
-      :fatal => Mixlib::Log::FATAL,
+      trace: Mixlib::Log::TRACE,
+      debug: Mixlib::Log::DEBUG,
+      info: Mixlib::Log::INFO,
+      warn: Mixlib::Log::WARN,
+      error: Mixlib::Log::ERROR,
+      fatal: Mixlib::Log::FATAL,
     }
     levels.each do |symbol, constant|
       Logit.level(symbol)

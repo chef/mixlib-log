@@ -10,7 +10,7 @@ end
 task default: [:style, :spec, :features]
 
 # For rubygems-test
-task :test => :spec
+task test: :spec
 
 RDoc::Task.new do |rdoc|
   rdoc.rdoc_dir = "rdoc"
