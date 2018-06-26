@@ -1,9 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 2.0.5 -->
+## [v2.0.5](https://github.com/chef/mixlib-log/tree/v2.0.5) (2018-06-26)
+
+#### Merged Pull Requests
+- remove hashrocket syntax [#41](https://github.com/chef/mixlib-log/pull/41) ([lamont-granquist](https://github.com/lamont-granquist))
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=2.0.4 -->
+### Changes since 2.0.4 release
+
+#### Merged Pull Requests
+- remove hashrocket syntax [#41](https://github.com/chef/mixlib-log/pull/41) ([lamont-granquist](https://github.com/lamont-granquist)) <!-- 2.0.5 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
