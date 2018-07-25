@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 2.0.5 -->
-## [v2.0.5](https://github.com/chef/mixlib-log/tree/v2.0.5) (2018-06-26)
+<!-- latest_release 2.0.6 -->
+## [v2.0.6](https://github.com/chef/mixlib-log/tree/v2.0.6) (2018-07-25)
 
 #### Merged Pull Requests
-- remove hashrocket syntax [#41](https://github.com/chef/mixlib-log/pull/41) ([lamont-granquist](https://github.com/lamont-granquist))
+- Remove the changelog generator gem [#42](https://github.com/chef/mixlib-log/pull/42) ([tas50](https://github.com/tas50))
 <!-- latest_release -->
 
 <!-- release_rollup since=2.0.4 -->
 ### Changes since 2.0.4 release
 
 #### Merged Pull Requests
+- Remove the changelog generator gem [#42](https://github.com/chef/mixlib-log/pull/42) ([tas50](https://github.com/tas50)) <!-- 2.0.6 -->
 - remove hashrocket syntax [#41](https://github.com/chef/mixlib-log/pull/41) ([lamont-granquist](https://github.com/lamont-granquist)) <!-- 2.0.5 -->
 <!-- release_rollup -->
 
