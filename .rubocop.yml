@@ -1,2 +1,3 @@
-Style/HashSyntax:
-  Enabled: true
+Style/PreferredHashMethods:
+  Exclude:
+    - 'lib/mixlib/log/formatter.rb'

@@ -31,13 +31,21 @@ Log.init('/tmp/logfile', 7)  # log to /tmp/logfile, rotate every day
 
 Enjoy!
 
+## Documentation
+
+All documentation is written using YARD. You can generate a by running:
+
+```
+rake docs
+```
+
 ## Contributing
 
-For information on contributing to this project see <https://github.com/chef/chef/blob/master/CONTRIBUTING.md>
+For information on contributing to this project please see our [Contributing Documentation](https://github.com/chef/chef/blob/master/CONTRIBUTING.md)
 
-## License
+## License & Copyright
 
-- Copyright:: Copyright (c) 2008-2016 Chef Software, Inc.
+- Copyright:: Copyright (c) 2008-2018 Chef Software, Inc.
 - License:: Apache License, Version 2.0
 
 ```text

@@ -1,22 +1,14 @@
 require "bundler/gem_tasks"
-require "rdoc/task"
 require "rspec/core/rake_task"
 require "cucumber/rake/task"
 
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = "spec/**/*_spec.rb"
-end
-
 task default: [:style, :spec, :features]
 
-# For rubygems-test
-task test: :spec
+Bundler::GemHelper.install_tasks
 
-RDoc::Task.new do |rdoc|
-  rdoc.rdoc_dir = "rdoc"
-  rdoc.title = "mixlib-log #{Mixlib::Log::VERSION}"
-  rdoc.rdoc_files.include("README*")
-  rdoc.rdoc_files.include("lib/**/*.rb")
+desc "Run specs"
+RSpec::Core::RakeTask.new(:spec) do |spec|
+  spec.pattern = "spec/**/*_spec.rb"
 end
 
 Cucumber::Rake::Task.new(:features) do |t|
@@ -30,5 +22,20 @@ begin
     task.options += ["--display-cop-names", "--no-color"]
   end
 rescue LoadError
-  puts "chefstyle/rubocop is not available.  gem install chefstyle to do style checking."
+  puts "chefstyle/rubocop is not available. bundle install first to make sure all dependencies are installed."
+end
+
+begin
+  require "yard"
+  YARD::Rake::YardocTask.new(:docs)
+rescue LoadError
+  puts "yard is not available. bundle install first to make sure all dependencies are installed."
+end
+
+task :console do
+  require "irb"
+  require "irb/completion"
+  require "mixlib/log"
+  ARGV.clear
+  IRB.start
 end
