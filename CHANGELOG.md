@@ -1,29 +1,26 @@
 # Change Log
 
-<!-- latest_release 2.0.9 -->
-## [v2.0.9](https://github.com/chef/mixlib-log/tree/v2.0.9) (2018-12-18)
-
-#### Merged Pull Requests
-- Only ship the required library files in the gem artifact [#45](https://github.com/chef/mixlib-log/pull/45) ([tas50](https://github.com/tas50))
+<!-- latest_release -->
 <!-- latest_release -->
 
-<!-- release_rollup since=2.0.4 -->
-### Changes since 2.0.4 release
-
-#### Merged Pull Requests
-- Only ship the required library files in the gem artifact [#45](https://github.com/chef/mixlib-log/pull/45) ([tas50](https://github.com/tas50)) <!-- 2.0.9 -->
-- Test on Ruby 2.6 in Travis + test on Xenial [#46](https://github.com/chef/mixlib-log/pull/46) ([tas50](https://github.com/tas50)) <!-- 2.0.8 -->
-- Test on all the Ruby versions we support [#43](https://github.com/chef/mixlib-log/pull/43) ([tas50](https://github.com/tas50)) <!-- 2.0.7 -->
-- Remove the changelog generator gem [#42](https://github.com/chef/mixlib-log/pull/42) ([tas50](https://github.com/tas50)) <!-- 2.0.6 -->
-- remove hashrocket syntax [#41](https://github.com/chef/mixlib-log/pull/41) ([lamont-granquist](https://github.com/lamont-granquist)) <!-- 2.0.5 -->
+<!-- release_rollup -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
+## [v2.0.9](https://github.com/chef/mixlib-log/tree/v2.0.9) (2018-12-18)
+
+#### Merged Pull Requests
+- remove hashrocket syntax [#41](https://github.com/chef/mixlib-log/pull/41) ([lamont-granquist](https://github.com/lamont-granquist))
+- Remove the changelog generator gem [#42](https://github.com/chef/mixlib-log/pull/42) ([tas50](https://github.com/tas50))
+- Test on all the Ruby versions we support [#43](https://github.com/chef/mixlib-log/pull/43) ([tas50](https://github.com/tas50))
+- Test on Ruby 2.6 in Travis + test on Xenial [#46](https://github.com/chef/mixlib-log/pull/46) ([tas50](https://github.com/tas50))
+- Only ship the required library files in the gem artifact [#45](https://github.com/chef/mixlib-log/pull/45) ([tas50](https://github.com/tas50))
+<!-- latest_stable_release -->
+
 ## [v2.0.4](https://github.com/chef/mixlib-log/tree/v2.0.4) (2018-04-12)
 
 #### Merged Pull Requests
 - fix labelling [#37](https://github.com/chef/mixlib-log/pull/37) ([thommay](https://github.com/thommay))
-<!-- latest_stable_release -->
 
 ## [2.0.1](https://github.com/chef/mixlib-log/tree/2.0.1) (2018-02-28)
 [Full Changelog](https://github.com/chef/mixlib-log/compare/v2.0.0...2.0.1)
