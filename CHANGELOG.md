@@ -1,9 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release unreleased -->
+## Unreleased
+
+#### Merged Pull Requests
+- update travis, drop ruby &lt; 2.5, major version bump [#47](https://github.com/chef/mixlib-log/pull/47) ([lamont-granquist](https://github.com/lamont-granquist))
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=2.0.9 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- update travis, drop ruby &lt; 2.5, major version bump [#47](https://github.com/chef/mixlib-log/pull/47) ([lamont-granquist](https://github.com/lamont-granquist)) <!-- 3.0.0 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
