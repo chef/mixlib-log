@@ -7,14 +7,17 @@
 - update travis, drop ruby &lt; 2.5, major version bump [#47](https://github.com/chef/mixlib-log/pull/47) ([lamont-granquist](https://github.com/lamont-granquist))
 <!-- latest_release -->
 
-<!-- release_rollup since=2.0.9 -->
+<!-- release_rollup since=3.0.0 -->
 ### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- update travis, drop ruby &lt; 2.5, major version bump [#47](https://github.com/chef/mixlib-log/pull/47) ([lamont-granquist](https://github.com/lamont-granquist)) <!-- 3.0.0 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
+## [v3.0.0](https://github.com/chef/mixlib-log/tree/v3.0.0) (2019-01-04)
+
+#### Merged Pull Requests
+- update travis, drop ruby &lt; 2.5, major version bump [#47](https://github.com/chef/mixlib-log/pull/47) ([lamont-granquist](https://github.com/lamont-granquist))
+<!-- latest_stable_release -->
+
 ## [v2.0.9](https://github.com/chef/mixlib-log/tree/v2.0.9) (2018-12-18)
 
 #### Merged Pull Requests
@@ -23,7 +26,6 @@
 - Test on all the Ruby versions we support [#43](https://github.com/chef/mixlib-log/pull/43) ([tas50](https://github.com/tas50))
 - Test on Ruby 2.6 in Travis + test on Xenial [#46](https://github.com/chef/mixlib-log/pull/46) ([tas50](https://github.com/tas50))
 - Only ship the required library files in the gem artifact [#45](https://github.com/chef/mixlib-log/pull/45) ([tas50](https://github.com/tas50))
-<!-- latest_stable_release -->
 
 ## [v2.0.4](https://github.com/chef/mixlib-log/tree/v2.0.4) (2018-04-12)
 
