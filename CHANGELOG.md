@@ -1,14 +1,18 @@
 # Change Log
 
-<!-- latest_release unreleased -->
-## Unreleased
+<!-- latest_release 3.0.1 -->
+## [v3.0.1](https://github.com/chef/mixlib-log/tree/v3.0.1) (2019-01-04)
 
 #### Merged Pull Requests
+- reverting back to ruby 2.3 support [#48](https://github.com/chef/mixlib-log/pull/48) ([lamont-granquist](https://github.com/lamont-granquist))
 - update travis, drop ruby &lt; 2.5, major version bump [#47](https://github.com/chef/mixlib-log/pull/47) ([lamont-granquist](https://github.com/lamont-granquist))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.0.0 -->
 ### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- reverting back to ruby 2.3 support [#48](https://github.com/chef/mixlib-log/pull/48) ([lamont-granquist](https://github.com/lamont-granquist)) <!-- 3.0.1 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
