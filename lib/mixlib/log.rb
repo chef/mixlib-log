@@ -36,7 +36,7 @@ module Mixlib
     end
 
     # An Array of log devices that will be logged to. Defaults to just the default
-    #   @logger log device, but you can push to this array to add more devices.
+    # \@logger log device, but you can push to this array to add more devices.
     def loggers
       @loggers ||= [logger]
     end
