@@ -1,9 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 3.0.2 -->
+## [v3.0.2](https://github.com/chef/mixlib-log/tree/v3.0.2) (2019-04-23)
+
+#### Merged Pull Requests
+- Expand testing / Update GitHub templates [#51](https://github.com/chef/mixlib-log/pull/51) ([tas50](https://github.com/tas50))
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=3.0.1 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Expand testing / Update GitHub templates [#51](https://github.com/chef/mixlib-log/pull/51) ([tas50](https://github.com/tas50)) <!-- 3.0.2 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
