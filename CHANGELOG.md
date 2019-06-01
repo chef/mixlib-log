@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.0.3 -->
-## [3.0.3](https://github.com/chef/mixlib-log/tree/3.0.3) (2019-06-01)
+<!-- latest_release 3.0.4 -->
+## [3.0.4](https://github.com/chef/mixlib-log/tree/3.0.4) (2019-06-01)
 
 #### Merged Pull Requests
-- Add Build Kite PR Testing [#52](https://github.com/chef/mixlib-log/pull/52) ([tas50](https://github.com/tas50))
+- Remove Travis PR Testing [#53](https://github.com/chef/mixlib-log/pull/53) ([tas50](https://github.com/tas50))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.0.1 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Remove Travis PR Testing [#53](https://github.com/chef/mixlib-log/pull/53) ([tas50](https://github.com/tas50)) <!-- 3.0.4 -->
 - Add Build Kite PR Testing [#52](https://github.com/chef/mixlib-log/pull/52) ([tas50](https://github.com/tas50)) <!-- 3.0.3 -->
 - Expand testing / Update GitHub templates [#51](https://github.com/chef/mixlib-log/pull/51) ([tas50](https://github.com/tas50)) <!-- 3.0.2 -->
 <!-- release_rollup -->
