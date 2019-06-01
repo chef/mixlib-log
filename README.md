@@ -1,6 +1,14 @@
 # Mixlib::Log
 
-[![Build Status Master](https://travis-ci.org/chef/mixlib-log.svg?branch=master)](https://travis-ci.org/chef/mixlib-log) [![Gem Version](https://badge.fury.io/rb/mixlib-log.svg)](https://badge.fury.io/rb/mixlib-log)
+[![Gem Version](https://badge.fury.io/rb/mixlib-log.svg)](https://badge.fury.io/rb/mixlib-log)
+
+**Umbrella Project**: [Chef Foundation](https://github.com/chef/chef-oss-practices/blob/master/projects/chef-foundation.md)
+
+**Project State**: [Active](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md#active)
+
+**Issues [Response Time Maximum](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md)**: 14 days
+
+**Pull Request [Response Time Maximum](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md)**: 14 days
 
 Mixlib::Log provides a mixin for enabling a class based logger object, a-la Merb, Chef, and Nanite. To use it:
 
@@ -25,7 +33,7 @@ Log.fatal('wewt')
 By default, `Mixlib::Logger` logs to STDOUT. To alter this, you should call `Log.init`, passing any arguments to the standard Ruby Logger. For example:
 
 ```ruby
-Log.init('/tmp/logfile')  # log to /tmp/logfile   
+Log.init('/tmp/logfile')  # log to /tmp/logfile
 Log.init('/tmp/logfile', 7)  # log to /tmp/logfile, rotate every day
 ```
 
@@ -45,7 +53,7 @@ For information on contributing to this project please see our [Contributing Doc
 
 ## License & Copyright
 
-- Copyright:: Copyright (c) 2008-2018 Chef Software, Inc.
+- Copyright:: Copyright (c) 2008-2019 Chef Software, Inc.
 - License:: Apache License, Version 2.0
 
 ```text
