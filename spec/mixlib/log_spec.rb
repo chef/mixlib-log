@@ -134,17 +134,17 @@ RSpec.describe Mixlib::Log do
   end
 
   it "should raise an ArgumentError if you try and set the level to something strange using the binding form" do
-    expect(lambda { Logit.level = :the_roots }).to raise_error(ArgumentError)
+    expect { Logit.level = :the_roots }.to raise_error(ArgumentError)
   end
 
   it "should raise an ArgumentError if you try and set the level to something strange using the method form" do
-    expect(lambda { Logit.level(:the_roots) }).to raise_error(ArgumentError)
+    expect { Logit.level(:the_roots) }.to raise_error(ArgumentError)
   end
 
   it "should pass other method calls directly to logger" do
     Logit.level = :debug
     expect(Logit).to be_debug
-    expect(lambda { Logit.debug("Gimme some sugar!") }).to_not raise_error
+    expect { Logit.debug("Gimme some sugar!") }.to_not raise_error
   end
 
   it "should pass add method calls directly to logger" do
@@ -152,7 +152,7 @@ RSpec.describe Mixlib::Log do
     Logit.init(logdev)
     Logit.level = :debug
     expect(Logit).to be_debug
-    expect(lambda { Logit.add(Logger::DEBUG, "Gimme some sugar!") }).to_not raise_error
+    expect { Logit.add(Logger::DEBUG, "Gimme some sugar!") }.to_not raise_error
     expect(logdev.string).to match(/Gimme some sugar/)
   end
 
