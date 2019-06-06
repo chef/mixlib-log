@@ -190,6 +190,7 @@ module Mixlib
         # via public API. In order to reduce amount of impact and
         # handle only File type log devices I had to use this method
         # to get access to it.
+        next unless logger.instance_variable_defined?(:"@logdev")
         next unless (logdev = logger.instance_variable_get(:"@logdev"))
         loggers_to_close << logger if logdev.filename
       end
