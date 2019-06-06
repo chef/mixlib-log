@@ -46,7 +46,7 @@ module Mixlib
     # and creates a new one if it doesn't yet exist
     ##
     def logger
-      @logger || init
+      @logger ||= init
     end
 
     # Sets the log device to +new_log_device+. Any additional loggers
