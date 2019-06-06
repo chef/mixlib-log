@@ -27,11 +27,12 @@ module Mixlib
   module Log
 
     include Logging
-    @logger, @loggers = nil
 
     def reset!
+      @logger  ||= nil
+      @loggers ||= []
       close!
-      @logger, @loggers = nil, nil
+      @logger = @loggers = nil
       @metadata = {}
     end
 
