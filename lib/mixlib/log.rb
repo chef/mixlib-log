@@ -170,7 +170,7 @@ module Mixlib
 
     def logger_for(*opts)
       if opts.empty?
-        Mixlib::Log::Logger.new(STDOUT)
+        Mixlib::Log::Logger.new($stdout)
       elsif LEVELS.keys.inject(true) { |quacks, level| quacks && opts.first.respond_to?(level) }
         opts.first
       else

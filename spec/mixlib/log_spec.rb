@@ -142,9 +142,14 @@ RSpec.describe Mixlib::Log do
   end
 
   it "should pass other method calls directly to logger" do
-    Logit.level = :debug
-    expect(Logit).to be_debug
-    expect { Logit.debug("Gimme some sugar!") }.to_not raise_error
+    expect do
+      # this needs to be inside of the block because the level setting
+      # is causing the init, which grabs $stderr before rspec replaces
+      # it for output testing.
+      Logit.level = :debug
+      expect(Logit).to be_debug
+      Logit.debug("Gimme some sugar!")
+    end.to output(/DEBUG: Gimme some sugar!/).to_stdout
   end
 
   it "should pass add method calls directly to logger" do
@@ -158,6 +163,7 @@ RSpec.describe Mixlib::Log do
 
   it "should default to STDOUT if init is called with no arguments" do
     logger_mock = Struct.new(:formatter, :level).new
+    # intentionally STDOUT to avoid unfailable test
     expect(Logger).to receive(:new).with(STDOUT).and_return(logger_mock)
     Logit.init
   end
@@ -203,6 +209,7 @@ RSpec.describe Mixlib::Log do
   end
 
   it "should return nil from its logging methods" do
+    # intentionally STDOUT to avoid unfailable test
     expect(Logger).to receive(:new).with(STDOUT) { double("a-quiet-logger").as_null_object }
     Logit.init
 
