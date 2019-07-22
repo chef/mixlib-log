@@ -27,11 +27,12 @@ module Mixlib
   module Log
 
     include Logging
-    @logger, @loggers = nil
 
     def reset!
+      @logger  ||= nil
+      @loggers ||= []
       close!
-      @logger, @loggers = nil, nil
+      @logger = @loggers = nil
       @metadata = {}
     end
 
@@ -46,7 +47,7 @@ module Mixlib
     # and creates a new one if it doesn't yet exist
     ##
     def logger
-      @logger || init
+      @logger ||= init
     end
 
     # Sets the log device to +new_log_device+. Any additional loggers
@@ -170,7 +171,7 @@ module Mixlib
 
     def logger_for(*opts)
       if opts.empty?
-        Mixlib::Log::Logger.new(STDOUT)
+        Mixlib::Log::Logger.new($stdout)
       elsif LEVELS.keys.inject(true) { |quacks, level| quacks && opts.first.respond_to?(level) }
         opts.first
       else
@@ -190,6 +191,7 @@ module Mixlib
         # via public API. In order to reduce amount of impact and
         # handle only File type log devices I had to use this method
         # to get access to it.
+        next unless logger.instance_variable_defined?(:"@logdev")
         next unless (logdev = logger.instance_variable_get(:"@logdev"))
         loggers_to_close << logger if logdev.filename
       end
