@@ -1,28 +1,40 @@
 require "bundler/gem_tasks"
-require "rspec/core/rake_task"
-require "cucumber/rake/task"
 
-task default: %i{style spec features}
+begin
+  require "cucumber/rake/task"
 
-Bundler::GemHelper.install_tasks
-
-desc "Run specs"
-RSpec::Core::RakeTask.new(:spec) do |spec|
-  spec.pattern = "spec/**/*_spec.rb"
+  Cucumber::Rake::Task.new(:features) do |t|
+    t.cucumber_opts = "--format pretty"
+  end
+rescue LoadError
+  desc "cucumber is not installed, this task is disabled"
+  task :spec do
+    abort "cucumber is not installed. bundle install first to make sure all dependencies are installed."
+  end
 end
 
-Cucumber::Rake::Task.new(:features) do |t|
-  t.cucumber_opts = "--format pretty"
+begin
+  require "rspec/core/rake_task"
+
+  RSpec::Core::RakeTask.new do |t|
+    t.pattern = "spec/**/*_spec.rb"
+  end
+rescue LoadError
+  desc "rspec is not installed, this task is disabled"
+  task :spec do
+    abort "rspec is not installed. bundle install first to make sure all dependencies are installed."
+  end
 end
 
 begin
   require "chefstyle"
   require "rubocop/rake_task"
+  desc "Run Chefstyle tests"
   RuboCop::RakeTask.new(:style) do |task|
     task.options += ["--display-cop-names", "--no-color"]
   end
 rescue LoadError
-  puts "chefstyle/rubocop is not available. bundle install first to make sure all dependencies are installed."
+  puts "chefstyle gem is not installed. bundle install first to make sure all dependencies are installed."
 end
 
 begin
@@ -39,3 +51,5 @@ task :console do
   ARGV.clear
   IRB.start
 end
+
+task default: %i{style spec features}
