@@ -36,14 +36,14 @@ module Mixlib
       # Note that we *only* query the default logger (@logger) and not any other
       # loggers that may have been added, even though it is possible to configure
       # two (or more) loggers at different log levels.
-      [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+      %i{trace? debug? info? warn? error? fatal?}.each do |method_name|
         define_method(method_name) do
           parent.send(method_name)
         end
       end
 
       def add(severity, message = nil, progname = nil, data: {}, &block)
-        data = metadata.merge(data) if data.kind_of?(Hash)
+        data = metadata.merge(data) if data.is_a?(Hash)
         parent.send(:pass, severity, message, progname, data: data, &block)
       end
 

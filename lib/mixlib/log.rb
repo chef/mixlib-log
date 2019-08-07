@@ -61,7 +61,7 @@ module Mixlib
       if other.respond_to?(:loggers) && other.respond_to?(:logger)
         @loggers = other.loggers
         @logger = other.logger
-      elsif other.kind_of?(Array)
+      elsif other.is_a?(Array)
         @loggers = other
         @logger = other.first
       else
@@ -82,7 +82,7 @@ module Mixlib
     def init(*opts)
       reset!
       @logger = logger_for(*opts)
-      @logger.formatter = Mixlib::Log::Formatter.new() if @logger.respond_to?(:formatter=)
+      @logger.formatter = Mixlib::Log::Formatter.new if @logger.respond_to?(:formatter=)
       @logger.level = Logger::WARN
       @configured = true
       @parent = nil
@@ -110,6 +110,7 @@ module Mixlib
     def level=(new_level)
       level_int = LEVEL_NAMES.key?(new_level) ? new_level : LEVELS[new_level]
       raise ArgumentError, "Log level must be one of :trace, :debug, :info, :warn, :error, or :fatal" if level_int.nil?
+
       loggers.each { |l| l.level = level_int }
     end
 
@@ -125,7 +126,7 @@ module Mixlib
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
-    [:trace?, :debug?, :info?, :warn?, :error?, :fatal?].each do |method_name|
+    %i{trace? debug? info? warn? error? fatal?}.each do |method_name|
       define_method(method_name) do
         logger.send(method_name)
       end
@@ -137,7 +138,7 @@ module Mixlib
 
     def add(severity, message = nil, progname = nil, data: {}, &block)
       message, progname, data = yield if block_given?
-      data = metadata.merge(data) if metadata.kind_of?(Hash) && data.kind_of?(Hash)
+      data = metadata.merge(data) if metadata.is_a?(Hash) && data.is_a?(Hash)
       loggers.each do |l|
         # if we don't have any metadata, let's not do the potentially expensive
         # merging and managing that this call requires
@@ -193,6 +194,7 @@ module Mixlib
         # to get access to it.
         next unless logger.instance_variable_defined?(:"@logdev")
         next unless (logdev = logger.instance_variable_get(:"@logdev"))
+
         loggers_to_close << logger if logdev.filename
       end
       loggers_to_close

@@ -38,7 +38,7 @@ class LoggerLike
     @messages << message
   end
 
-  [:trace, :debug, :info, :warn, :error, :fatal].each do |method_name|
+  %i{trace debug info warn error fatal}.each do |method_name|
     class_eval(<<-E)
       def #{method_name}(message)
         @messages << message

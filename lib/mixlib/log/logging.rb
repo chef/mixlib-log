@@ -41,7 +41,7 @@ module Mixlib
 
       # Define the standard logger methods on this class programmatically.
       # No need to incur method_missing overhead on every log call.
-      [:trace, :debug, :info, :warn, :error, :fatal].each do |method_name|
+      %i{trace debug info warn error fatal}.each do |method_name|
         level = LEVELS[method_name]
         define_method(method_name) do |msg = nil, data: {}, &block|
           pass(level, msg, data: data, &block)

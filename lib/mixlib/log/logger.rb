@@ -45,14 +45,16 @@ module Mixlib
 
       def add_data(severity, message, progname, data: {})
         return true if @logdev.nil? || severity < @level
+
         data ||= {}
-        if message.kind_of?(::Exception)
+        if message.is_a?(::Exception)
           data[:err] = message
         else
           data[:msg] = message
         end
         @logdev.write(
-          format_message(to_label(severity), Time.now, progname, data))
+          format_message(to_label(severity), Time.now, progname, data)
+        )
         true
       end
       alias_method :add, :add_data
