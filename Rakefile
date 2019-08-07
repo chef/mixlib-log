@@ -5,6 +5,7 @@ begin
 
   Cucumber::Rake::Task.new(:features) do |t|
     t.cucumber_opts = "--format pretty"
+    t.bundler = false
   end
 rescue LoadError
   desc "cucumber is not installed, this task is disabled"
