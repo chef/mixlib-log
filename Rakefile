@@ -1,4 +1,4 @@
-require "bundler/gem_tasks"
+require "bundler"
 
 begin
   require "cucumber/rake/task"
