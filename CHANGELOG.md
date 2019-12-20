@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.0.6 -->
-## [v3.0.6](https://github.com/chef/mixlib-log/tree/v3.0.6) (2019-08-07)
+<!-- latest_release 3.0.7 -->
+## [v3.0.7](https://github.com/chef/mixlib-log/tree/v3.0.7) (2019-12-20)
 
 #### Merged Pull Requests
-- Add windows testing in Buildkite [#56](https://github.com/chef/mixlib-log/pull/56) ([tas50](https://github.com/tas50))
+- Test on Ruby 2.7 + random testing improvements [#58](https://github.com/chef/mixlib-log/pull/58) ([tas50](https://github.com/tas50))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.0.1 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Test on Ruby 2.7 + random testing improvements [#58](https://github.com/chef/mixlib-log/pull/58) ([tas50](https://github.com/tas50)) <!-- 3.0.7 -->
 - Add windows testing in Buildkite [#56](https://github.com/chef/mixlib-log/pull/56) ([tas50](https://github.com/tas50)) <!-- 3.0.6 -->
 - Resolve all warnings emitted during testing [#54](https://github.com/chef/mixlib-log/pull/54) ([zenspider](https://github.com/zenspider)) <!-- 3.0.5 -->
 - Remove Travis PR Testing [#53](https://github.com/chef/mixlib-log/pull/53) ([tas50](https://github.com/tas50)) <!-- 3.0.4 -->
