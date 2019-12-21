@@ -17,11 +17,11 @@
 # limitations under the License.
 
 require "logger"
-require "mixlib/log/version"
-require "mixlib/log/formatter"
-require "mixlib/log/child"
-require "mixlib/log/logging"
-require "mixlib/log/logger"
+require_relative "log/version"
+require_relative "log/formatter"
+require_relative "log/child"
+require_relative "log/logging"
+require_relative "log/logger"
 
 module Mixlib
   module Log
