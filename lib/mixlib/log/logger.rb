@@ -1,5 +1,5 @@
 require "logger"
-require "mixlib/log/logging"
+require_relative "logging"
 
 # A subclass of Ruby's stdlib Logger with all the mutex and logrotation stuff
 # ripped out, and metadata added in.
