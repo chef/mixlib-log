@@ -1,31 +1,28 @@
 # Change Log
 
-<!-- latest_release 3.0.8 -->
-## [v3.0.8](https://github.com/chef/mixlib-log/tree/v3.0.8) (2019-12-30)
-
-#### Merged Pull Requests
-- Substitute require for require_relative [#59](https://github.com/chef/mixlib-log/pull/59) ([tas50](https://github.com/tas50))
+<!-- latest_release -->
 <!-- latest_release -->
 
-<!-- release_rollup since=3.0.1 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Substitute require for require_relative [#59](https://github.com/chef/mixlib-log/pull/59) ([tas50](https://github.com/tas50)) <!-- 3.0.8 -->
-- Test on Ruby 2.7 + random testing improvements [#58](https://github.com/chef/mixlib-log/pull/58) ([tas50](https://github.com/tas50)) <!-- 3.0.7 -->
-- Add windows testing in Buildkite [#56](https://github.com/chef/mixlib-log/pull/56) ([tas50](https://github.com/tas50)) <!-- 3.0.6 -->
-- Resolve all warnings emitted during testing [#54](https://github.com/chef/mixlib-log/pull/54) ([zenspider](https://github.com/zenspider)) <!-- 3.0.5 -->
-- Remove Travis PR Testing [#53](https://github.com/chef/mixlib-log/pull/53) ([tas50](https://github.com/tas50)) <!-- 3.0.4 -->
-- Add Build Kite PR Testing [#52](https://github.com/chef/mixlib-log/pull/52) ([tas50](https://github.com/tas50)) <!-- 3.0.3 -->
-- Expand testing / Update GitHub templates [#51](https://github.com/chef/mixlib-log/pull/51) ([tas50](https://github.com/tas50)) <!-- 3.0.2 -->
+<!-- release_rollup -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
+## [v3.0.8](https://github.com/chef/mixlib-log/tree/v3.0.8) (2019-12-30)
+
+#### Merged Pull Requests
+- Expand testing / Update GitHub templates [#51](https://github.com/chef/mixlib-log/pull/51) ([tas50](https://github.com/tas50))
+- Add Build Kite PR Testing [#52](https://github.com/chef/mixlib-log/pull/52) ([tas50](https://github.com/tas50))
+- Remove Travis PR Testing [#53](https://github.com/chef/mixlib-log/pull/53) ([tas50](https://github.com/tas50))
+- Resolve all warnings emitted during testing [#54](https://github.com/chef/mixlib-log/pull/54) ([zenspider](https://github.com/zenspider))
+- Add windows testing in Buildkite [#56](https://github.com/chef/mixlib-log/pull/56) ([tas50](https://github.com/tas50))
+- Test on Ruby 2.7 + random testing improvements [#58](https://github.com/chef/mixlib-log/pull/58) ([tas50](https://github.com/tas50))
+- Substitute require for require_relative [#59](https://github.com/chef/mixlib-log/pull/59) ([tas50](https://github.com/tas50))
+<!-- latest_stable_release -->
+
 ## [v3.0.1](https://github.com/chef/mixlib-log/tree/v3.0.1) (2019-01-05)
 
 #### Merged Pull Requests
 - reverting back to ruby 2.3 support [#48](https://github.com/chef/mixlib-log/pull/48) ([lamont-granquist](https://github.com/lamont-granquist))
-<!-- latest_stable_release -->
 
 ## [v3.0.0](https://github.com/chef/mixlib-log/tree/v3.0.0) (2019-01-04)
 
