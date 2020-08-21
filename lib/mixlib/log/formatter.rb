@@ -16,7 +16,7 @@
 # limitations under the License.
 
 require "logger"
-require "time"
+require "time" unless defined?(Time)
 
 module Mixlib
   module Log
