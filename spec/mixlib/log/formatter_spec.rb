@@ -16,7 +16,7 @@
 # limitations under the License.
 #
 
-require "time"
+require "time" unless defined?(Time.zone_offset)
 require File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "spec_helper"))
 
 RSpec.describe Mixlib::Log::Formatter do

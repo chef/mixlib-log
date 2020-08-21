@@ -17,8 +17,8 @@
 # limitations under the License.
 #
 
-require "tempfile"
-require "stringio"
+require "tempfile" unless defined?(Tempfile)
+require "stringio" unless defined?(StringIO)
 require "spec_helper"
 
 class LoggerLike
