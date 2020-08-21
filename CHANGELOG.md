@@ -1,20 +1,18 @@
 # Change Log
 
-<!-- latest_release 3.0.9 -->
+<!-- latest_release -->
+<!-- latest_release -->
+
+<!-- release_rollup -->
+<!-- release_rollup -->
+
+<!-- latest_stable_release -->
 ## [v3.0.9](https://github.com/chef/mixlib-log/tree/v3.0.9) (2020-08-21)
 
 #### Merged Pull Requests
 - Optimize our requires [#60](https://github.com/chef/mixlib-log/pull/60) ([tas50](https://github.com/tas50))
-<!-- latest_release -->
-
-<!-- release_rollup since=3.0.8 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Optimize our requires [#60](https://github.com/chef/mixlib-log/pull/60) ([tas50](https://github.com/tas50)) <!-- 3.0.9 -->
-<!-- release_rollup -->
-
 <!-- latest_stable_release -->
+
 ## [v3.0.8](https://github.com/chef/mixlib-log/tree/v3.0.8) (2019-12-30)
 
 #### Merged Pull Requests
@@ -25,7 +23,6 @@
 - Add windows testing in Buildkite [#56](https://github.com/chef/mixlib-log/pull/56) ([tas50](https://github.com/tas50))
 - Test on Ruby 2.7 + random testing improvements [#58](https://github.com/chef/mixlib-log/pull/58) ([tas50](https://github.com/tas50))
 - Substitute require for require_relative [#59](https://github.com/chef/mixlib-log/pull/59) ([tas50](https://github.com/tas50))
-<!-- latest_stable_release -->
 
 ## [v3.0.1](https://github.com/chef/mixlib-log/tree/v3.0.1) (2019-01-05)
 
