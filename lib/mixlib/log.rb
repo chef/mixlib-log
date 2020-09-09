@@ -118,7 +118,7 @@ module Mixlib
       if new_level.nil?
         LEVEL_NAMES[logger.level]
       else
-        self.level = (new_level)
+        self.level = new_level
       end
     end
 

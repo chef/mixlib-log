@@ -17,7 +17,7 @@
 #
 
 require "time" unless defined?(Time.zone_offset)
-require File.expand_path(File.join(File.dirname(__FILE__), "..", "..", "spec_helper"))
+require File.expand_path(File.join(__dir__, "..", "..", "spec_helper"))
 
 RSpec.describe Mixlib::Log::Formatter do
   before(:each) do
