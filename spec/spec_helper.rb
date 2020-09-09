@@ -18,7 +18,6 @@
 #
 
 $TESTING = true
-$:.push File.join(__dir__, "..", "lib")
 
 require "rspec"
 require "mixlib/log"
