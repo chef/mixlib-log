@@ -1,4 +1,4 @@
-$:.unshift File.expand_path("../lib", __FILE__)
+$:.unshift File.expand_path("lib", __dir__)
 require "mixlib/log/version"
 
 Gem::Specification.new do |gem|
