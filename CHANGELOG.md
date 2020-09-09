@@ -1,9 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 3.0.10 -->
+## [v3.0.10](https://github.com/chef/mixlib-log/tree/v3.0.10) (2020-09-09)
+
+#### Merged Pull Requests
+- Replace __FILE__ with __dir__ and other minor chefstyle fixes [#61](https://github.com/chef/mixlib-log/pull/61) ([tas50](https://github.com/tas50))
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=3.0.9 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Replace __FILE__ with __dir__ and other minor chefstyle fixes [#61](https://github.com/chef/mixlib-log/pull/61) ([tas50](https://github.com/tas50)) <!-- 3.0.10 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
