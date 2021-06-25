@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.0.11 -->
-## [v3.0.11](https://github.com/chef/mixlib-log/tree/v3.0.11) (2021-04-07)
+<!-- latest_release 3.0.12 -->
+## [v3.0.12](https://github.com/chef/mixlib-log/tree/v3.0.12) (2021-06-25)
 
 #### Merged Pull Requests
-- Add Ruby 3.0 testing [#62](https://github.com/chef/mixlib-log/pull/62) ([tas50](https://github.com/tas50))
+- Upgrade to GitHub-native Dependabot [#63](https://github.com/chef/mixlib-log/pull/63) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot]))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.0.9 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Upgrade to GitHub-native Dependabot [#63](https://github.com/chef/mixlib-log/pull/63) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 3.0.12 -->
 - Add Ruby 3.0 testing [#62](https://github.com/chef/mixlib-log/pull/62) ([tas50](https://github.com/tas50)) <!-- 3.0.11 -->
 - Replace __FILE__ with __dir__ and other minor chefstyle fixes [#61](https://github.com/chef/mixlib-log/pull/61) ([tas50](https://github.com/tas50)) <!-- 3.0.10 -->
 <!-- release_rollup -->
