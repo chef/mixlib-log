@@ -9,6 +9,7 @@ group :test do
   gem "cucumber", "< 5" # remove the version pin when we drop Ruby 2.4 support
   gem "rake"
   gem "rspec", "~> 3.7"
+  gem "rubocop-ast", "= 1.4.1" # Drop this dependency/version when we remove ruby-2.4 support
 end
 
 group :debug do
