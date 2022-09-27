@@ -4,7 +4,7 @@ source "https://rubygems.org"
 gemspec
 
 group :test do
-  gem "activesupport", "< 7" # this dep can be removed when we drop Ruby 2.4 support
+  gem "activesupport", "< 7" # this dep can be removed when we drop Ruby 2.5 support
   gem "chefstyle"
   gem "cucumber", "< 5" # remove the version pin when we drop Ruby 2.4 support
   gem "rake"
