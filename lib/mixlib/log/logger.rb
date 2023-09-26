@@ -33,11 +33,7 @@ module Mixlib
       # Create an instance.
       #
       def initialize(logdev)
-        @progname = nil
-        @level = DEBUG
-        @default_formatter = Formatter.new
-        @formatter = nil
-        @logdev = nil
+        super(nil)
         if logdev
           @logdev = LocklessLogDevice.new(logdev)
         end
