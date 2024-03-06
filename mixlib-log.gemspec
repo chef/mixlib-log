@@ -11,5 +11,5 @@ Gem::Specification.new do |gem|
   gem.authors = ["Chef Software, Inc."]
   gem.files = %w{LICENSE} + Dir.glob("lib/**/*", File::FNM_DOTMATCH).reject { |f| File.directory?(f) }
   gem.require_paths = ["lib"]
-  gem.required_ruby_version = ">= 2.5"
+  gem.required_ruby_version = ">= 2.7"
 end
