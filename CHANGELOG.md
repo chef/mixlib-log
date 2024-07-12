@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.0.14 -->
-## [v3.0.14](https://github.com/chef/mixlib-log/tree/v3.0.14) (2024-03-06)
+<!-- latest_release 3.1.0 -->
+## [v3.1.0](https://github.com/chef/mixlib-log/tree/v3.1.0) (2024-07-12)
 
 #### Merged Pull Requests
-- Bump minimum to 2.7 [#75](https://github.com/chef/mixlib-log/pull/75) ([tpowell-progress](https://github.com/tpowell-progress))
+- Support ruby3.3 Logger by properly initialize super class [#74](https://github.com/chef/mixlib-log/pull/74) ([mtasaka](https://github.com/mtasaka))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.0.9 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Support ruby3.3 Logger by properly initialize super class [#74](https://github.com/chef/mixlib-log/pull/74) ([mtasaka](https://github.com/mtasaka)) <!-- 3.1.0 -->
 - Bump minimum to 2.7 [#75](https://github.com/chef/mixlib-log/pull/75) ([tpowell-progress](https://github.com/tpowell-progress)) <!-- 3.0.14 -->
 - Remove  Ruby 2.4 support  and Test Ruby 3.0/3.1 [#66](https://github.com/chef/mixlib-log/pull/66) ([poorndm](https://github.com/poorndm)) <!-- 3.0.13 -->
 - Upgrade to GitHub-native Dependabot [#63](https://github.com/chef/mixlib-log/pull/63) ([dependabot-preview[bot]](https://github.com/dependabot-preview[bot])) <!-- 3.0.12 -->
