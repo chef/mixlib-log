@@ -33,7 +33,7 @@ module Mixlib
       # Create an instance.
       #
       def initialize(logdev)
-        super(nil)
+        super(nil, formatter: ::Mixlib::Log::Formatter.new)
         if logdev
           @logdev = LocklessLogDevice.new(logdev)
         end
