@@ -1,9 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 3.1.2 -->
+## [v3.1.2](https://github.com/chef/mixlib-log/tree/v3.1.2) (2024-07-25)
+
+#### Merged Pull Requests
+- Fix formatter regression from Ruby 3.3 Logger fix [#78](https://github.com/chef/mixlib-log/pull/78) ([stanhu](https://github.com/stanhu))
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=3.1.1 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Fix formatter regression from Ruby 3.3 Logger fix [#78](https://github.com/chef/mixlib-log/pull/78) ([stanhu](https://github.com/stanhu)) <!-- 3.1.2 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
