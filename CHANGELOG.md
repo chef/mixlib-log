@@ -1,21 +1,19 @@
 # Change Log
 
-<!-- latest_release 3.2.0 -->
-## [v3.2.0](https://github.com/chef/mixlib-log/tree/v3.2.0) (2025-01-23)
-
-#### Merged Pull Requests
-- Move ffi dependency forward [#81](https://github.com/chef/mixlib-log/pull/81) ([jaymzh](https://github.com/jaymzh))
+<!-- latest_release -->
 <!-- latest_release -->
 
-<!-- release_rollup since=3.1.1 -->
-### Changes not yet released to rubygems.org
-
-#### Merged Pull Requests
-- Move ffi dependency forward [#81](https://github.com/chef/mixlib-log/pull/81) ([jaymzh](https://github.com/jaymzh)) <!-- 3.2.0 -->
-- Fix formatter regression from Ruby 3.3 Logger fix [#78](https://github.com/chef/mixlib-log/pull/78) ([stanhu](https://github.com/stanhu)) <!-- 3.1.2 -->
+<!-- release_rollup -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
+## [v3.2.0](https://github.com/chef/mixlib-log/tree/v3.2.0) (2025-01-28)
+
+#### Merged Pull Requests
+- Fix formatter regression from Ruby 3.3 Logger fix [#78](https://github.com/chef/mixlib-log/pull/78) ([stanhu](https://github.com/stanhu))
+- Move ffi dependency forward [#81](https://github.com/chef/mixlib-log/pull/81) ([jaymzh](https://github.com/jaymzh))
+<!-- latest_stable_release -->
+
 ## [v3.1.1](https://github.com/chef/mixlib-log/tree/v3.1.1) (2024-07-12)
 
 #### Merged Pull Requests
@@ -26,7 +24,6 @@
 - Bump minimum to 2.7 [#75](https://github.com/chef/mixlib-log/pull/75) ([tpowell-progress](https://github.com/tpowell-progress))
 - Support ruby3.3 Logger by properly initialize super class [#74](https://github.com/chef/mixlib-log/pull/74) ([mtasaka](https://github.com/mtasaka))
 - ffi less than 1.17.0 because of ruby 3.0 [#77](https://github.com/chef/mixlib-log/pull/77) ([tpowell-progress](https://github.com/tpowell-progress))
-<!-- latest_stable_release -->
 
 ## [v3.0.9](https://github.com/chef/mixlib-log/tree/v3.0.9) (2020-08-21)
 
