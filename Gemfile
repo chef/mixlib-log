@@ -5,11 +5,10 @@ gemspec
 
 group :test do
   gem "activesupport"
-  gem "chefstyle"
+  gem "cookstyle", ">= 7.32.8"
   gem "cucumber", "~> 9.1.0"
   gem "rake"
   gem "rspec", "~> 3.7"
-  gem "rubocop-ast"
 end
 
 group :debug do
