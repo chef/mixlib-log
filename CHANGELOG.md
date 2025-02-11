@@ -1,9 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 3.2.1 -->
+## [v3.2.1](https://github.com/chef/mixlib-log/tree/v3.2.1) (2025-02-11)
+
+#### Merged Pull Requests
+- Chefstyle to Cookstyle migration [#79](https://github.com/chef/mixlib-log/pull/79) ([dafyddcrosby](https://github.com/dafyddcrosby))
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=3.2.0 -->
+### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- Chefstyle to Cookstyle migration [#79](https://github.com/chef/mixlib-log/pull/79) ([dafyddcrosby](https://github.com/dafyddcrosby)) <!-- 3.2.1 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
