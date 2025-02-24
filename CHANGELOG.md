@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.2.1 -->
-## [v3.2.1](https://github.com/chef/mixlib-log/tree/v3.2.1) (2025-02-11)
+<!-- latest_release 3.2.2 -->
+## [v3.2.2](https://github.com/chef/mixlib-log/tree/v3.2.2) (2025-02-24)
 
 #### Merged Pull Requests
-- Chefstyle to Cookstyle migration [#79](https://github.com/chef/mixlib-log/pull/79) ([dafyddcrosby](https://github.com/dafyddcrosby))
+- updating ffi for Ohai [#83](https://github.com/chef/mixlib-log/pull/83) ([johnmccrae](https://github.com/johnmccrae))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.2.0 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- updating ffi for Ohai [#83](https://github.com/chef/mixlib-log/pull/83) ([johnmccrae](https://github.com/johnmccrae)) <!-- 3.2.2 -->
 - Chefstyle to Cookstyle migration [#79](https://github.com/chef/mixlib-log/pull/79) ([dafyddcrosby](https://github.com/dafyddcrosby)) <!-- 3.2.1 -->
 <!-- release_rollup -->
 
