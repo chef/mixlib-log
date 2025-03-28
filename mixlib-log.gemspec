@@ -13,6 +13,5 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib"]
   gem.required_ruby_version = ">= 3.1"
 
-  # 1.17.1 is broken, see: https://github.com/ffi/ffi/issues/1139
-  gem.add_dependency "ffi", ">= 1.15.5", "< 1.17.0"
+  gem.add_dependency "ffi", ">= 1.15.5"
 end
