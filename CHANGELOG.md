@@ -3,17 +3,20 @@
 <!-- latest_release -->
 <!-- latest_release -->
 
-<!-- release_rollup -->
+<!-- release_rollup since=3.1.2 -->
+### Changes not yet released to rubygems.org
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
+## [v3.1.2](https://github.com/chef/mixlib-log/tree/v3.1.2) (2025-04-10)
+<!-- latest_stable_release -->
+
 ## [v3.2.3](https://github.com/chef/mixlib-log/tree/v3.2.3) (2025-04-01)
 
 #### Merged Pull Requests
 - Chefstyle to Cookstyle migration [#79](https://github.com/chef/mixlib-log/pull/79) ([dafyddcrosby](https://github.com/dafyddcrosby))
 - updating ffi for Ohai [#83](https://github.com/chef/mixlib-log/pull/83) ([johnmccrae](https://github.com/johnmccrae))
 - Relax ffi dependency to allow 1.17.1 and up [#82](https://github.com/chef/mixlib-log/pull/82) ([stanhu](https://github.com/stanhu))
-<!-- latest_stable_release -->
 
 ## [v3.2.0](https://github.com/chef/mixlib-log/tree/v3.2.0) (2025-01-28)
 
