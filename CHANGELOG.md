@@ -11,6 +11,8 @@
 ## [v3.1.2](https://github.com/chef/mixlib-log/tree/v3.1.2) (2025-04-10)
 <!-- latest_stable_release -->
 
+## [v3.1.2](https://github.com/chef/mixlib-log/tree/v3.1.2) (2025-04-10)
+
 ## [v3.2.3](https://github.com/chef/mixlib-log/tree/v3.2.3) (2025-04-01)
 
 #### Merged Pull Requests
