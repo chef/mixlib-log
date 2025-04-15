@@ -1,10 +1,17 @@
 # Change Log
 
-<!-- latest_release -->
+<!-- latest_release 3.2.4 -->
+## [v3.2.4](https://github.com/chef/mixlib-log/tree/v3.2.4) (2025-04-15)
+
+#### Merged Pull Requests
+- ruby 3.4 upgrade [#86](https://github.com/chef/mixlib-log/pull/86) ([rishichawda](https://github.com/rishichawda))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.1.2 -->
 ### Changes not yet released to rubygems.org
+
+#### Merged Pull Requests
+- ruby 3.4 upgrade [#86](https://github.com/chef/mixlib-log/pull/86) ([rishichawda](https://github.com/rishichawda)) <!-- 3.2.4 -->
 <!-- release_rollup -->
 
 <!-- latest_stable_release -->
