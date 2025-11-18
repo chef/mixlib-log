@@ -3,14 +3,6 @@
 [![Gem Version](https://badge.fury.io/rb/mixlib-log.svg)](https://badge.fury.io/rb/mixlib-log)
 [![Build status](https://badge.buildkite.com/cb1e5b6f3cc77071f4b2315f6b605fe60d86e2862a490873d4.svg?branch=master)](https://buildkite.com/chef-oss/chef-mixlib-log-master-verify)
 
-**Umbrella Project**: [Chef Foundation](https://github.com/chef/chef-oss-practices/blob/master/projects/chef-foundation.md)
-
-**Project State**: [Active](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md#active)
-
-**Issues [Response Time Maximum](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md)**: 14 days
-
-**Pull Request [Response Time Maximum](https://github.com/chef/chef-oss-practices/blob/master/repo-management/repo-states.md)**: 14 days
-
 Mixlib::Log provides a mixin for enabling a class based logger object, a-la Merb, Chef, and Nanite. To use it:
 
 ```ruby
