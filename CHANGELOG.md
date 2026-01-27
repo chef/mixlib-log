@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.2.9 -->
-## [v3.2.9](https://github.com/chef/mixlib-log/tree/v3.2.9) (2025-11-14)
+<!-- latest_release 3.2.10 -->
+## [v3.2.10](https://github.com/chef/mixlib-log/tree/v3.2.10) (2026-01-27)
 
 #### Merged Pull Requests
-- set up ai assisted development workflow [#94](https://github.com/chef/mixlib-log/pull/94) ([rishichawda](https://github.com/rishichawda))
+- Update cucumber requirement from ~&gt; 10.1.0 to ~&gt; 10.2.0 [#96](https://github.com/chef/mixlib-log/pull/96) ([dependabot[bot]](https://github.com/dependabot[bot]))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.1.2 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Update cucumber requirement from ~&gt; 10.1.0 to ~&gt; 10.2.0 [#96](https://github.com/chef/mixlib-log/pull/96) ([dependabot[bot]](https://github.com/dependabot[bot])) <!-- 3.2.10 -->
 - set up ai assisted development workflow [#94](https://github.com/chef/mixlib-log/pull/94) ([rishichawda](https://github.com/rishichawda)) <!-- 3.2.9 -->
 - Add GitHub Security Actions Workflow [#89](https://github.com/chef/mixlib-log/pull/89) ([sean-sype-simmons](https://github.com/sean-sype-simmons)) <!-- 3.2.8 -->
 - Update cucumber requirement from ~&gt; 10.0.0 to ~&gt; 10.1.0 [#91](https://github.com/chef/mixlib-log/pull/91) ([dependabot[bot]](https://github.com/dependabot[bot])) <!-- 3.2.7 -->
