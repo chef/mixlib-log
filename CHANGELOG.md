@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.2.10 -->
-## [v3.2.10](https://github.com/chef/mixlib-log/tree/v3.2.10) (2026-01-27)
+<!-- latest_release 3.2.11 -->
+## [v3.2.11](https://github.com/chef/mixlib-log/tree/v3.2.11) (2026-03-31)
 
 #### Merged Pull Requests
-- Update cucumber requirement from ~&gt; 10.1.0 to ~&gt; 10.2.0 [#96](https://github.com/chef/mixlib-log/pull/96) ([dependabot[bot]](https://github.com/dependabot[bot]))
+- Remove docs team from blockers for MD files [#98](https://github.com/chef/mixlib-log/pull/98) ([jaymzh](https://github.com/jaymzh))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.1.2 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Remove docs team from blockers for MD files [#98](https://github.com/chef/mixlib-log/pull/98) ([jaymzh](https://github.com/jaymzh)) <!-- 3.2.11 -->
 - Update cucumber requirement from ~&gt; 10.1.0 to ~&gt; 10.2.0 [#96](https://github.com/chef/mixlib-log/pull/96) ([dependabot[bot]](https://github.com/dependabot[bot])) <!-- 3.2.10 -->
 - set up ai assisted development workflow [#94](https://github.com/chef/mixlib-log/pull/94) ([rishichawda](https://github.com/rishichawda)) <!-- 3.2.9 -->
 - Add GitHub Security Actions Workflow [#89](https://github.com/chef/mixlib-log/pull/89) ([sean-sype-simmons](https://github.com/sean-sype-simmons)) <!-- 3.2.8 -->
