@@ -5,7 +5,7 @@ Mixin::Log Notices
 Developed at Chef (http://www.chef.io).
 
 
- * Copyright 2009-2016, Chef Software, Inc. <legal@chef.io>
+ * Copyright (c) 2009-2025 Progress Software Corporation and/or its subsidiaries or affiliates. All Rights Reserved.
 
 Mixin::Log incorporates code from Chef.  The Chef notice file follows:
 
