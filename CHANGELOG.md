@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.2.12 -->
-## [v3.2.12](https://github.com/chef/mixlib-log/tree/v3.2.12) (2026-05-05)
+<!-- latest_release 3.2.13 -->
+## [v3.2.13](https://github.com/chef/mixlib-log/tree/v3.2.13) (2026-06-02)
 
 #### Merged Pull Requests
-- fixup dependabot config [#99](https://github.com/chef/mixlib-log/pull/99) ([jaymzh](https://github.com/jaymzh))
+- CHEF-27674 Update and standardize copyright notices to Progress Software Corporation - copyright_update [#97](https://github.com/chef/mixlib-log/pull/97) ([clintoncwolfe](https://github.com/clintoncwolfe))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.1.2 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- CHEF-27674 Update and standardize copyright notices to Progress Software Corporation - copyright_update [#97](https://github.com/chef/mixlib-log/pull/97) ([clintoncwolfe](https://github.com/clintoncwolfe)) <!-- 3.2.13 -->
 - fixup dependabot config [#99](https://github.com/chef/mixlib-log/pull/99) ([jaymzh](https://github.com/jaymzh)) <!-- 3.2.12 -->
 - Remove docs team from blockers for MD files [#98](https://github.com/chef/mixlib-log/pull/98) ([jaymzh](https://github.com/jaymzh)) <!-- 3.2.11 -->
 - Update cucumber requirement from ~&gt; 10.1.0 to ~&gt; 10.2.0 [#96](https://github.com/chef/mixlib-log/pull/96) ([dependabot[bot]](https://github.com/dependabot[bot])) <!-- 3.2.10 -->
