@@ -1,16 +1,17 @@
 # Change Log
 
-<!-- latest_release 3.2.13 -->
-## [v3.2.13](https://github.com/chef/mixlib-log/tree/v3.2.13) (2026-06-02)
+<!-- latest_release 3.2.14 -->
+## [v3.2.14](https://github.com/chef/mixlib-log/tree/v3.2.14) (2026-06-17)
 
 #### Merged Pull Requests
-- CHEF-27674 Update and standardize copyright notices to Progress Software Corporation - copyright_update [#97](https://github.com/chef/mixlib-log/pull/97) ([clintoncwolfe](https://github.com/clintoncwolfe))
+- Normalize CI [#100](https://github.com/chef/mixlib-log/pull/100) ([jaymzh](https://github.com/jaymzh))
 <!-- latest_release -->
 
 <!-- release_rollup since=3.1.2 -->
 ### Changes not yet released to rubygems.org
 
 #### Merged Pull Requests
+- Normalize CI [#100](https://github.com/chef/mixlib-log/pull/100) ([jaymzh](https://github.com/jaymzh)) <!-- 3.2.14 -->
 - CHEF-27674 Update and standardize copyright notices to Progress Software Corporation - copyright_update [#97](https://github.com/chef/mixlib-log/pull/97) ([clintoncwolfe](https://github.com/clintoncwolfe)) <!-- 3.2.13 -->
 - fixup dependabot config [#99](https://github.com/chef/mixlib-log/pull/99) ([jaymzh](https://github.com/jaymzh)) <!-- 3.2.12 -->
 - Remove docs team from blockers for MD files [#98](https://github.com/chef/mixlib-log/pull/98) ([jaymzh](https://github.com/jaymzh)) <!-- 3.2.11 -->
