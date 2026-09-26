@@ -16,49 +16,66 @@
 # limitations under the License.
 #
 
-require "time" unless defined?(Time.zone_offset)
-require "spec_helper"
+require "time"
 
 RSpec.describe Mixlib::Log::Formatter do
-  before(:each) do
-    @formatter = Mixlib::Log::Formatter.new
-  end
+  subject(:formatter) { described_class.new }
 
-  it "should print raw strings with msg2str(string)" do
-    expect(@formatter.msg2str("nuthin new")).to eq("nuthin new")
-  end
+  let(:time) { Time.new(2026, 1, 2, 3, 4, 5, "+00:00") }
 
-  it "should format exceptions properly with msg2str(e)" do
-    e = IOError.new("legendary roots crew")
-    expect(@formatter.msg2str(e)).to eq("legendary roots crew (IOError)\n")
-  end
-
-  it "should format random objects via inspect with msg2str(Object)" do
-    expect(@formatter.msg2str([ "black thought", "?uestlove" ])).to eq('["black thought", "?uestlove"]')
-  end
-
-  it "should return a formatted string with call" do
-    time = Time.new
-    Mixlib::Log::Formatter.show_time = true
-    expect(@formatter.call("monkey", time, "test", "mos def")).to eq("[#{time.iso8601}] monkey: mos def\n")
-  end
-
-  it "should allow you to turn the time on and off in the output" do
-    Mixlib::Log::Formatter.show_time = false
-    expect(@formatter.call("monkey", Time.new, "test", "mos def")).to eq("monkey: mos def\n")
-  end
-
-  context "with structured data" do
-    let(:data) { {} }
-
-    it "should format a message" do
-      data[:msg] = "nuthin new"
-      expect(@formatter.msg2str(data)).to eq("nuthin new")
+  describe "#call" do
+    it "prefixes the message with an ISO 8601 timestamp by default" do
+      expect(formatter.call("WARN", time, "prog", "mos def")).to eq("[2026-01-02T03:04:05+00:00] WARN: mos def\n")
     end
 
-    it "should format an exception" do
-      data[:err] = IOError.new("legendary roots crew")
-      expect(@formatter.msg2str(data)).to eq("legendary roots crew (IOError)\n")
+    it "omits the timestamp when show_time is off" do
+      described_class.show_time = false
+      expect(formatter.call("WARN", time, "prog", "mos def")).to eq("WARN: mos def\n")
+    end
+  end
+
+  describe ".show_time=" do
+    it "turns the timestamp off when called with no value" do
+      described_class.send(:show_time=)
+      expect(formatter.call("WARN", time, nil, "msg")).to eq("WARN: msg\n")
+    end
+  end
+
+  describe "#msg2str" do
+    it "passes strings through" do
+      expect(formatter.msg2str("nuthin new")).to eq("nuthin new")
+    end
+
+    it "formats an exception without a backtrace" do
+      expect(formatter.msg2str(IOError.new("legendary roots crew"))).to eq("legendary roots crew (IOError)\n")
+    end
+
+    it "formats an exception with its backtrace" do
+      error = IOError.new("legendary roots crew")
+      error.set_backtrace(["a.rb:1", "b.rb:2"])
+      expect(formatter.msg2str(error)).to eq("legendary roots crew (IOError)\na.rb:1\nb.rb:2")
+    end
+
+    it "inspects anything else" do
+      expect(formatter.msg2str([ "black thought", "?uestlove" ])).to eq('["black thought", "?uestlove"]')
+    end
+
+    it "inspects nil" do
+      expect(formatter.msg2str(nil)).to eq("nil")
+    end
+
+    context "with structured data" do
+      it "uses the :msg key" do
+        expect(formatter.msg2str({ msg: "nuthin new", other: 1 })).to eq("nuthin new")
+      end
+
+      it "formats the :err key" do
+        expect(formatter.msg2str({ err: IOError.new("legendary roots crew") })).to eq("legendary roots crew (IOError)\n")
+      end
+
+      it "prefers :err over :msg" do
+        expect(formatter.msg2str({ msg: "ignored", err: IOError.new("boom") })).to eq("boom (IOError)\n")
+      end
     end
   end
 end

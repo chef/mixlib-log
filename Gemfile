@@ -1,14 +1,12 @@
-
 source "https://rubygems.org"
 
 gemspec
 
 group :test do
-  gem "activesupport"
-  gem "cookstyle", ">= 7.32.8"
-  gem "cucumber", "~> 10.2.0"
-  gem "rake"
-  gem "rspec", "~> 3.7"
+  gem "cookstyle", "~> 9.0"
+  gem "rake", "~> 13.4"
+  gem "rspec", "~> 3.13"
+  gem "simplecov", "~> 1.3", require: false
 end
 
 group :debug do

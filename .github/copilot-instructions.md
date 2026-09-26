@@ -13,10 +13,6 @@ mixlib-log/
 │   ├── ISSUE_TEMPLATE/        # Issue templates
 │   ├── dependabot.yml         # Dependabot configuration
 │   └── workflows/             # GitHub Actions workflows
-├── features/                   # Cucumber features for behavior testing
-│   ├── log.feature           # Main logging feature tests
-│   ├── steps/                # Step definitions
-│   └── support/              # Test support files
 ├── lib/                       # Main library code
 │   └── mixlib/
 │       ├── log.rb            # Main logging module
@@ -64,8 +60,7 @@ When a Jira ID is provided:
 ### Unit Test Coverage
 - **Maintain >80% test coverage** for all new and modified code
 - Use RSpec for unit tests (located in `spec/` directory)
-- Use Cucumber for integration/behavior tests (located in `features/` directory)
-- Run tests with: `bundle exec rake spec` and `bundle exec rake features`
+- Run tests with: `bundle exec rake spec`
 
 ### Test Commands
 ```bash
@@ -75,14 +70,10 @@ bundle exec rake
 # Run only unit tests
 bundle exec rake spec
 
-# Run only integration tests  
-bundle exec rake features
-
 # Run style checks
 bundle exec rake style
 
-# Check coverage
-bundle exec rspec --format html --out coverage/index.html
+# Coverage is collected by SimpleCov on every run; open coverage/index.html
 ```
 
 ## Pull Request and Branch Management
@@ -263,7 +254,6 @@ When implementing a task, follow this comprehensive workflow:
 ### Phase 3: Testing and Validation
 6. **Test Execution**:
    - Run unit tests: `bundle exec rake spec`
-   - Run integration tests: `bundle exec rake features`
    - Run style checks: `bundle exec rake style`
    - **Prompt**: Report test results and any issues
 

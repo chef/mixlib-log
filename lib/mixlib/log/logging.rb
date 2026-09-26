@@ -35,7 +35,7 @@ module Mixlib
       attr_accessor :metadata
 
       def pass(severity, args, progname = nil, data: {}, &block)
-        args, progname, data = yield if block_given?
+        args, progname, data = merge_block_result(yield, progname, data) if block_given?
         add(severity, args, progname, data: data)
       end
 
@@ -49,6 +49,19 @@ module Mixlib
         end
       end
 
+      private
+
+      # A log block may return just a message or [message, progname, data].
+      # Anything it leaves out keeps the value it had outside the block, and
+      # block data is merged over existing data rather than replacing it.
+      def merge_block_result(result, progname, data)
+        message, block_progname, block_data = result
+        progname = block_progname unless block_progname.nil?
+        if block_data.is_a?(Hash)
+          data = data.is_a?(Hash) ? data.merge(block_data) : block_data
+        end
+        [message, progname, data]
+      end
     end
   end
 end

@@ -65,7 +65,7 @@ module Mixlib
         @loggers = other
         @logger = other.first
       else
-        msg = "#use_log_devices takes a Mixlib::Log object or array of log devices. " <<
+        msg = "#use_log_devices takes a Mixlib::Log object or array of log devices. " \
           "You gave: #{other.inspect}"
         raise ArgumentError, msg
       end
@@ -126,10 +126,15 @@ module Mixlib
     # Note that we *only* query the default logger (@logger) and not any other
     # loggers that may have been added, even though it is possible to configure
     # two (or more) loggers at different log levels.
-    %i{trace? debug? info? warn? error? fatal?}.each do |method_name|
+    %i{debug? info? warn? error? fatal?}.each do |method_name|
       define_method(method_name) do
         logger.send(method_name)
       end
+    end
+
+    # A plain ::Logger has no trace? so fall back to comparing its level
+    def trace?
+      logger.respond_to?(:trace?) ? logger.trace? : logger.level <= TRACE
     end
 
     def <<(msg)
@@ -137,7 +142,7 @@ module Mixlib
     end
 
     def add(severity, message = nil, progname = nil, data: {}, &block)
-      message, progname, data = yield if block_given?
+      message, progname, data = merge_block_result(yield, progname, data) if block_given?
       data = metadata.merge(data) if metadata.is_a?(Hash) && data.is_a?(Hash)
       loggers.each do |l|
         # if we don't have any metadata, let's not do the potentially expensive
@@ -148,6 +153,7 @@ module Mixlib
           l.add(severity, message, progname)
         end
       end
+      true
     end
 
     alias :log :add
@@ -164,8 +170,17 @@ module Mixlib
     # Passes any other method calls on directly to the underlying Logger object created with init. If
     # this method gets hit before a call to Mixlib::Logger.init has been made, it will call
     # Mixlib::Logger.init() with no arguments.
+    #
+    # The return value is the default logger's, so getters like +progname+ work.
     def method_missing(method_symbol, *args, &block)
-      loggers.each { |l| l.send(method_symbol, *args, &block) }
+      loggers.map { |l| l.send(method_symbol, *args, &block) }.first
+    end
+
+    # Only consult an existing logger so that respond_to? never initializes one
+    def respond_to_missing?(method_symbol, include_private = false)
+      return super unless @logger
+
+      @logger.respond_to?(method_symbol, include_private) || super
     end
 
     private
@@ -173,7 +188,7 @@ module Mixlib
     def logger_for(*opts)
       if opts.empty?
         Mixlib::Log::Logger.new($stdout)
-      elsif LEVELS.keys.inject(true) { |quacks, level| quacks && opts.first.respond_to?(level) }
+      elsif %i{debug info warn error fatal}.all? { |level| opts.first.respond_to?(level) }
         opts.first
       else
         Mixlib::Log::Logger.new(*opts)
