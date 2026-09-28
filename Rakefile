@@ -1,25 +1,6 @@
-require "bundler"
-
-begin
-  require "cucumber/rake/task"
-
-  Cucumber::Rake::Task.new(:features) do |t|
-    t.cucumber_opts = "--format pretty"
-    t.bundler = false
-  end
-rescue LoadError
-  desc "cucumber is not installed, this task is disabled"
-  task :spec do
-    abort "cucumber is not installed. bundle install first to make sure all dependencies are installed."
-  end
-end
-
 begin
   require "rspec/core/rake_task"
-
-  RSpec::Core::RakeTask.new do |t|
-    t.pattern = "spec/**/*_spec.rb"
-  end
+  RSpec::Core::RakeTask.new(:spec)
 rescue LoadError
   desc "rspec is not installed, this task is disabled"
   task :spec do
@@ -46,4 +27,4 @@ task :console do
   IRB.start
 end
 
-task default: %i{style spec features}
+task default: %i{style spec}

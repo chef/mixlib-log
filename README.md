@@ -1,7 +1,8 @@
 # Mixlib::Log
 
 [![Gem Version](https://badge.fury.io/rb/mixlib-log.svg)](https://badge.fury.io/rb/mixlib-log)
-[![Build status](https://badge.buildkite.com/cb1e5b6f3cc77071f4b2315f6b605fe60d86e2862a490873d4.svg?branch=master)](https://buildkite.com/chef-oss/chef-mixlib-log-master-verify)
+[![Unit Tests](https://github.com/chef/mixlib-log/actions/workflows/unit.yml/badge.svg?branch=main)](https://github.com/chef/mixlib-log/actions/workflows/unit.yml)
+[![Lint](https://github.com/chef/mixlib-log/actions/workflows/lint.yml/badge.svg?branch=main)](https://github.com/chef/mixlib-log/actions/workflows/lint.yml)
 
 Mixlib::Log provides a mixin for enabling a class based logger object, a-la
 Merb, Chef, and Nanite. To use it:
@@ -24,12 +25,16 @@ Log.error('baz')
 Log.fatal('wewt')
 ```
 
-By default, `Mixlib::Logger` logs to STDOUT. To alter this, you should call `Log.init`, passing any arguments to the standard Ruby Logger. For example:
+By default, `Mixlib::Log` logs to STDOUT at the `:warn` level. To log somewhere else, call `Log.init` with a file path, an IO object, or an existing logger object. For example:
 
 ```ruby
-Log.init('/tmp/logfile')  # log to /tmp/logfile
-Log.init('/tmp/logfile', 7)  # log to /tmp/logfile, rotate every day
+Log.init('/tmp/logfile')          # log to /tmp/logfile
+Log.init($stderr)                 # log to an IO
+Log.init(Logger.new('/tmp/log'))  # use a logger you've already configured
+Log.level = :info
 ```
+
+Log files are never rotated. If you need rotation, pass in a `::Logger` configured for it, or use an external tool such as logrotate.
 
 Enjoy!
 
@@ -43,7 +48,7 @@ rake docs
 
 ## Contributing
 
-For information on contributing to this project please see our [Contributing Documentation](https://github.com/chef/chef/blob/master/CONTRIBUTING.md)
+For information on contributing to this project please see our [Contributing Documentation](https://github.com/chef/chef/blob/main/CONTRIBUTING.md)
 
 ## License 
 
