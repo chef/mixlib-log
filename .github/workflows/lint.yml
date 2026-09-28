@@ -7,6 +7,9 @@ on:
     branches:
       - main
 
+permissions:
+  contents: read
+
 concurrency:
   group: lint-${{ github.event.pull_request.number || github.run_id }}
   cancel-in-progress: true
@@ -15,17 +18,15 @@ jobs:
   cookstyle:
     runs-on: ubuntu-latest
     env:
-      BUNDLE_WITHOUT: ruby_shadow:packaging
+      BUNDLE_WITHOUT: debug
     steps:
       - uses: actions/checkout@v7
       - uses: ruby/setup-ruby@v1
         with:
-          ruby-version: 3.4
-          bundler-cache: false
+          ruby-version: "4.0"
+          bundler-cache: true
       - uses: r7kamura/rubocop-problem-matchers-action@v1  # this shows the failures in the PR
-      - run: |
-          bundle install
-          bundle exec cookstyle --chefstyle -c .rubocop.yml
+      - run: bundle exec cookstyle --chefstyle -c .rubocop.yml
 
   spellcheck:
     runs-on: ubuntu-latest
@@ -33,7 +34,7 @@ jobs:
       - uses: actions/checkout@v7
       - run: |
           curl --location 'https://raw.githubusercontent.com/chef/chef_dictionary/main/chef.txt' --output chef_dictionary.txt
-      - uses: streetsidesoftware/cspell-action@v8.4.0
+      - uses: streetsidesoftware/cspell-action@v9
 
   linelint:
     runs-on: ubuntu-latest
@@ -42,5 +43,5 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v7
       - name: Linelint
-        uses: fernandrone/linelint@master
+        uses: fernandrone/linelint@0.0.6
         id: linelint

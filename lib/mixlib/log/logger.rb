@@ -1,7 +1,7 @@
 require "logger"
 require_relative "logging"
 
-# A subclass of Ruby's stdlib Logger with all the mutex and logrotation stuff
+# A subclass of Ruby's stdlib Logger with all the mutex and log rotation stuff
 # ripped out, and metadata added in.
 module Mixlib
   module Log
@@ -39,15 +39,22 @@ module Mixlib
         end
       end
 
-      def add_data(severity, message, progname, data: {})
-        return true if @logdev.nil? || severity < @level
+      def add_data(severity, message = nil, progname = nil, data: {})
+        severity ||= UNKNOWN
+        return true if @logdev.nil? || severity < level
 
-        data ||= {}
-        if message.is_a?(::Exception)
-          data[:err] = message
-        else
-          data[:msg] = message
+        # match ::Logger#add: with no message, use the block or else the progname
+        if message.nil?
+          if block_given?
+            message = yield
+          else
+            message = progname
+            progname = @progname
+          end
         end
+
+        # build a new hash so the caller's data is never modified
+        data = (data || {}).merge(message.is_a?(::Exception) ? { err: message } : { msg: message })
         @logdev.write(
           format_message(to_label(severity), Time.now, progname, data)
         )
@@ -82,14 +89,14 @@ module Mixlib
 
         def open_logfile(filename)
           if FileTest.exist?(filename)
-            open(filename, (File::WRONLY | File::APPEND))
+            File.open(filename, (File::WRONLY | File::APPEND))
           else
             create_logfile(filename)
           end
         end
 
         def create_logfile(filename)
-          logdev = open(filename, (File::WRONLY | File::APPEND | File::CREAT))
+          logdev = File.open(filename, (File::WRONLY | File::APPEND | File::CREAT))
           add_log_header(logdev)
           logdev
         end

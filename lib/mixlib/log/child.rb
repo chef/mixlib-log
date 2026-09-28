@@ -43,9 +43,19 @@ module Mixlib
       end
 
       def add(severity, message = nil, progname = nil, data: {}, &block)
+        return true unless log_level_enabled?(severity)
+
         data = metadata.merge(data) if data.is_a?(Hash)
         parent.send(:pass, severity, message, progname, data: data, &block)
       end
+
+      private
+
+      def log_level_enabled?(severity)
+        parent.send(:log_level_enabled?, severity)
+      end
+
+      public
 
       def with_child(metadata = {})
         child = Child.new(self, metadata)

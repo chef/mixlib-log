@@ -14,4 +14,5 @@ Gem::Specification.new do |gem|
   gem.required_ruby_version = ">= 3.1"
 
   gem.add_dependency "ffi", ">= 1.15.5"
+  gem.add_dependency "logger" # no longer a default gem as of Ruby 4.0
 end

@@ -15,84 +15,129 @@
 # limitations under the License.
 #
 
-require "tempfile" unless defined?(Tempfile)
-require "stringio" unless defined?(StringIO)
-require "spec_helper"
+RSpec.describe Mixlib::Log::Child, :isolated_log do
+  subject(:child) { log.with_child }
 
-RSpec.describe Mixlib::Log::Child do
   before do
-    Logit.reset!
-    Logit.init(io)
-    Logit.level = :warn
+    log.init(io)
+    log.level = :warn
   end
-
-  let(:io) { StringIO.new }
-
-  let(:child) { Logit.with_child }
 
   it "has a parent" do
-    expect(child.parent).to be(Logit)
+    expect(child.parent).to be(log)
   end
 
-  it "accepts a message" do
-    Logit.with_child { |l| l.add(Logger::WARN, "a message") }
-    expect(io.string).to match(/a message$/)
+  it "logs through the parent" do
+    log.with_child { |l| l.add(Logger::WARN, "a message") }
+    expect(io.string).to match(/WARN: a message$/)
   end
 
-  context "with structured data" do
-    it "can be created with metadata" do
-      expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true" })
-      Logit.with_child({ child: "true" }) { |l| l.warn("a message") }
-    end
+  it "returns nil from logging methods" do
+    expect(child.warn("a message")).to be_nil
+  end
 
-    it "a message can be logged" do
-      expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true" })
-      Logit.with_child { |l| l.warn("a message", data: { child: "true" }) }
-    end
+  it "passes blocks through" do
+    child.warn { "from a block" }
+    expect(io.string).to match(/WARN: from a block/)
+  end
 
-    context "merges properly" do
-      it "in the simple case" do
-        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", meta: "data" })
-        Logit.with_child(meta: "data") { |l| l.warn("a message", data: { child: "true" }) }
-      end
+  it "respects the parent's level" do
+    child.info("dropped")
+    expect(io.string).to be_empty
+  end
 
-      it "when overwriting" do
-        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", meta: "overwritten" })
-        Logit.with_child(meta: "data") { |l| l.warn("a message", data: { child: "true", meta: "overwritten" }) }
-      end
-    end
+  it "does not evaluate the block when the parent drops the message" do
+    expect { |b| child.info(&b) }.not_to yield_control
+  end
 
-    context "when receiving a message from a child" do
-      it "passes data on" do
-        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", parent: "first" })
-        child.metadata = { parent: "first" }
-        child.with_child { |l| l.warn("a message", data: { child: "true" }) }
-      end
+  it "does not evaluate the block when a nested child's message is dropped" do
+    expect { |b| child.with_child.info(&b) }.not_to yield_control
+  end
 
-      it "merges its own data" do
-        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[:warn], "a message", nil, data: { child: "true", parent: "second" })
-        child.metadata = { parent: "first" }
-        child.with_child { |l| l.warn("a message", data: { child: "true", parent: "second" }) }
-      end
-    end
+  it "reports the parent's level" do
+    log.level = :debug
+    expect(child.level).to eq(:debug)
   end
 
   context "sends a message to the parent" do
-    %i{ debug info warn error fatal }.each do |level|
+    %i{trace debug info warn error fatal}.each do |level|
       it "at #{level}" do
-        expect(Logit).to receive(:pass).with(Mixlib::Log::LEVELS[level], "a #{level} message", nil, data: {})
-        Logit.level = level
-        child.send(level, "a #{level} message")
+        log.level = level
+        child.public_send(level, "a #{level} message")
+        expect(io.string).to match(/#{level.upcase}: a #{level} message/)
       end
     end
   end
 
   context "can query the parent's level" do
-    %i{ debug info warn error fatal }.each do |level|
+    %i{trace debug info warn error fatal}.each do |level|
       it "at #{level}" do
-        query = "#{level}?".to_sym
-        Logit.level = level
-        expect(child.send(query)).to be(true)
+        log.level = level
+        expect(child.public_send(:"#{level}?")).to be(true)
+      end
+    end
+
+    it "is false below the parent's level" do
+      expect(child).not_to be_info
+    end
+  end
+
+  context "with structured data" do
+    let(:device) { instance_spy(Mixlib::Log::Logger) }
+
+    before { log.init(device) }
+
+    def expect_data(data)
+      expect(device).to have_received(:add_data).with(Logger::WARN, "a message", nil, data: data)
+    end
+
+    it "can be created with metadata" do
+      log.with_child({ child: "true" }) { |l| l.warn("a message") }
+      expect_data(child: "true")
+    end
+
+    it "logs a message with data" do
+      log.with_child { |l| l.warn("a message", data: { child: "true" }) }
+      expect_data(child: "true")
+    end
+
+    it "merges message data over its metadata" do
+      log.with_child(meta: "data", key: "old") { |l| l.warn("a message", data: { key: "new" }) }
+      expect_data(meta: "data", key: "new")
+    end
+
+    it "merges its metadata over the parent's" do
+      log.metadata = { app: "test", key: "parent" }
+      log.with_child(key: "child") { |l| l.warn("a message") }
+      expect_data(app: "test", key: "child")
+    end
+
+    it "keeps its metadata when the message comes from a block" do
+      log.with_child(meta: "data") { |l| l.warn { "a message" } }
+      expect_data(meta: "data")
+    end
+
+    it "does not modify its metadata when logging" do
+      metadata = { meta: "data" }
+      log.with_child(metadata) { |l| l.warn("a message", data: { extra: 1 }) }
+      expect(metadata).to eq({ meta: "data" })
+    end
+
+    context "when nested" do
+      it "passes data up through each ancestor" do
+        child.metadata = { parent: "first" }
+        child.with_child { |l| l.warn("a message", data: { child: "true" }) }
+        expect_data(child: "true", parent: "first")
+      end
+
+      it "lets the innermost data win" do
+        child.metadata = { parent: "first" }
+        child.with_child { |l| l.warn("a message", data: { child: "true", parent: "second" }) }
+        expect_data(child: "true", parent: "second")
+      end
+
+      it "returns the grandchild without a block" do
+        expect(child.with_child).to have_attributes(parent: child)
       end
     end
   end
